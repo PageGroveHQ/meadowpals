@@ -14,8 +14,8 @@ const NUMBER_CARDS = [
 
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
-  letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter,index)=>({word:letter,picture:['🍎','🐻','🐱','🐶','🥚','🐸','🍇','🏠','🍦','🧃','🔑','🍃','🌙','🌙','🍊','🐷','👑','🌈','☀️','🐯','☂️','🎻','🐳','📦','🪀','🦓'][index],detail:`${letter} is for ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,speech:`${letter}. ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`})),
-  colors: [['Red','#ef5d5d','🍓'],['Orange','#f59c45','🍊'],['Yellow','#f6cf4a','☀️'],['Pink','#f49abb','🌸'],['Purple','#9b79d1','🍇'],['Green','#70b978','🌿'],['Blue','#5b9bd5','🐳'],['Black','#343643','🐈‍⬛'],['Brown','#95664b','🐻']].map(([word,color,picture])=>({word,picture,detail:`${word} is a wonderful color`,color,speech:word})),
+  letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter,index)=>({word:letter,picture:['🍎','🐻','🐱','🐶','🥚','🐸','🍇','🏠','🍦','🧃','🔑','🍃','🌙','🌙','🍊','🐷','👑','🌈','☀️','🐯','☂️','🎻','🐳','📦','🪀','🦓'][index],detail:`${letter} is for ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,speech:`${letter}. ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,audio:`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`})),
+  colors: [['Red','#ef5d5d','🍓'],['Orange','#f59c45','🍊'],['Yellow','#f6cf4a','☀️'],['Pink','#f49abb','🌸'],['Purple','#9b79d1','🍇'],['Green','#70b978','🌿'],['Blue','#5b9bd5','🐳'],['Black','#343643','🐈‍⬛'],['Brown','#95664b','🐻']].map(([word,color,picture],index)=>({word,picture,detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${word.toLowerCase()}.mp3`})),
   words: [
     ['Mommy','👩'],['Daddy','👨'],['Baby','👶'],['Family','👨‍👩‍👧'],['Friend','🧒'],['Dog','🐶'],['Cat','🐱'],['Bird','🐦'],['Fish','🐟'],['Duck','🦆'],
     ['Bear','🐻'],['Bunny','🐰'],['Cow','🐮'],['Pig','🐷'],['Horse','🐴'],['Lion','🦁'],['Monkey','🐵'],['Frog','🐸'],['Bug','🐞'],['Butterfly','🦋'],
@@ -28,4 +28,10 @@ window.MEADOW_DATA = {
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
   ].map(([word,picture])=>({word,picture,detail:word,speech:word}))
+};
+
+window.MEADOW_WORD_GROUPS = {
+  people:{title:'People',icon:'👨‍👩‍👧',words:['Mommy','Daddy','Baby','Family','Friend']},
+  animals:{title:'Animals',icon:'🐾',words:['Dog','Cat','Bird','Fish','Duck','Bear','Bunny','Cow','Pig','Horse','Lion','Monkey','Frog','Bug','Butterfly']},
+  food:{title:'Food & Drink',icon:'🍎',words:['Apple','Banana','Orange','Berry','Milk','Water','Bread','Cheese','Egg','Cookie']}
 };
