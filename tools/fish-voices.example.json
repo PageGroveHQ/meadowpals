@@ -1,0 +1,10 @@
+{
+  "model": "s2.1-pro-free",
+  "delayMs": 350,
+  "categories": ["numbers", "letters", "colors", "words"],
+  "voices": [
+    { "name": "pip", "referenceId": "REPLACE_WITH_PIP_VOICE_ID" },
+    { "name": "poppy", "referenceId": "REPLACE_WITH_POPPY_VOICE_ID" },
+    { "name": "doodle", "referenceId": "REPLACE_WITH_DOODLE_VOICE_ID" }
+  ]
+}

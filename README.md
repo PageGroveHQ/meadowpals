@@ -8,7 +8,7 @@ A calm, mobile-first flash-card app designed for toddlers and their grown-ups.
 - All 26 letters with a picture-word association
 - Nine colors: red, orange, yellow, pink, purple, green, blue, black, and brown
 - 100 first words with picture cues
-- Short rotating sets, large touch targets, swipe navigation, and built-in spoken labels
+- Complete category decks, large touch targets, swipe navigation, and built-in spoken labels
 - Local learner profiles with separate progress
 - No scores, streaks, timers, achievements, lives, or unlockables
 - Four gentle background tracks that rotate automatically at a toddler-friendly volume
@@ -27,7 +27,7 @@ All profile and reporting data remains in the browser's local storage. Nothing i
 
 ## Characters and artwork
 
-Pip the bear, Poppy the bunny, and Doodle the duck are original **Meadow Pals** characters created for this app. They intentionally avoid reliance on licensed entertainment characters. The primary character artwork is stored at `assets/meadow-pals/meadow-pals.png`; the installable app mark is `icon.svg`.
+Pip the bear, Poppy the bunny, and Doodle the duck are original **Meadow Pals** characters created for this app. They intentionally avoid reliance on licensed entertainment characters. The primary character artwork is stored at `assets/meadow-pals/meadow-pals.png`, the custom 0–10 counting scenes are under `assets/meadow-pals/numbers/`, and the installable app mark is `icon.svg`.
 
 ## Running locally
 
@@ -36,3 +36,14 @@ This is a static progressive web app. Serve the repository root with any local w
 ## Music
 
 The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins after the first user interaction, rotates automatically, lowers itself while a card name is spoken, and can be paused from the header or Parent Hub.
+
+## Generating Fish Audio voice packs
+
+`tools/fish-voice-pack.mjs` generates individual MP3 files directly from the vocabulary in `data.js`, so the audio list cannot drift away from the cards. It supports three independent voices, retries temporary API errors, and skips files already generated so an interrupted batch can safely resume.
+
+1. Copy `tools/fish-voices.example.json` to `tools/fish-voices.json` and replace each placeholder with the corresponding Fish Audio voice-model ID.
+2. In PowerShell, set the API key only for the current terminal: `$env:FISH_AUDIO_API_KEY='your-key'`.
+3. Generate one manageable batch first: `node tools/fish-voice-pack.mjs --config=tools/fish-voices.json --categories=words --voices=pip`.
+4. Repeat for Poppy and Doodle, or omit `--voices` to generate all configured voices. Omit `--categories` to use the categories listed in the JSON file.
+
+Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
