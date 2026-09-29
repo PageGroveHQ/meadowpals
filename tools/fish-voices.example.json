@@ -3,8 +3,8 @@
   "delayMs": 350,
   "categories": ["numbers", "letters", "colors", "words"],
   "voices": [
-    { "name": "pip", "referenceId": "REPLACE_WITH_PIP_VOICE_ID" },
-    { "name": "poppy", "referenceId": "REPLACE_WITH_POPPY_VOICE_ID" },
-    { "name": "doodle", "referenceId": "REPLACE_WITH_DOODLE_VOICE_ID" }
+    { "name": "pip", "referenceId": "9c35b9f26f2d4e38bea59ae0e4fea0c7" },
+    { "name": "poppy", "referenceId": "230fc4d0d8b44234a91242c4bac15feb" },
+    { "name": "doodle", "referenceId": "692a9545c1a94f52b0d570119fa6ac67" }
   ]
 }

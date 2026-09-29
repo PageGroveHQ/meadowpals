@@ -13,6 +13,8 @@ for(const [key,cards] of Object.entries(data))cards.forEach((card,index)=>{asser
 for(const card of data.numbers){
   assert(card.image,`number ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing number art ${card.image}`);
+  assert(card.audio,`number ${card.word} needs a Meadow Pals voice`);
+  assert(fs.existsSync(require('path').join(root,card.audio)),`missing number audio ${card.audio}`);
 }
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');

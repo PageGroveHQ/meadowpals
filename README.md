@@ -41,9 +41,9 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 
 `tools/fish-voice-pack.mjs` generates individual MP3 files directly from the vocabulary in `data.js`, so the audio list cannot drift away from the cards. It supports three independent voices, retries temporary API errors, and skips files already generated so an interrupted batch can safely resume.
 
-1. Copy `tools/fish-voices.example.json` to `tools/fish-voices.json` and replace each placeholder with the corresponding Fish Audio voice-model ID.
-2. In PowerShell, set the API key only for the current terminal: `$env:FISH_AUDIO_API_KEY='your-key'`.
-3. Generate one manageable batch first: `node tools/fish-voice-pack.mjs --config=tools/fish-voices.json --categories=words --voices=pip`.
-4. Repeat for Poppy and Doodle, or omit `--voices` to generate all configured voices. Omit `--categories` to use the categories listed in the JSON file.
+1. The approved Pip, Poppy, and Doodle voice IDs are stored in `tools/fish-voices.example.json`. Copy it to the ignored `tools/fish-voices.json` only when testing different voices locally.
+2. For a safe 0–10 test, run `tools/run-fish-number-test.ps1`; it requests the API key through a hidden prompt and removes it when generation ends.
+3. For later batches, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --voices=pip`.
+4. Repeat for Poppy and Doodle, or omit `--voices` to generate all configured voices. Omit `--categories` to use every category listed in the JSON file.
 
 Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.

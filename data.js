@@ -1,15 +1,15 @@
 const NUMBER_CARDS = [
-  {word:'0',speech:'Zero',image:'assets/meadow-pals/numbers/0-empty-basket.png',detail:'An empty basket means zero.'},
-  {word:'1',speech:'One',image:'assets/meadow-pals/numbers/1-apple.png',detail:'Pip is holding one apple.'},
-  {word:'2',speech:'Two',image:'assets/meadow-pals/numbers/2-birds.png',detail:'Poppy found two birds.'},
-  {word:'3',speech:'Three',image:'assets/meadow-pals/numbers/3-ducklings.png',detail:'Three ducklings are together.'},
-  {word:'4',speech:'Four',image:'assets/meadow-pals/numbers/4-blocks.png',detail:'Pip has four blocks.'},
-  {word:'5',speech:'Five',image:'assets/meadow-pals/numbers/5-flowers.png',detail:'Poppy sees five flowers.'},
-  {word:'6',speech:'Six',image:'assets/meadow-pals/numbers/6-bubbles.png',detail:'Doodle counts six bubbles.'},
-  {word:'7',speech:'Seven',image:'assets/meadow-pals/numbers/7-strawberries.png',detail:'Pip found seven strawberries.'},
-  {word:'8',speech:'Eight',image:'assets/meadow-pals/numbers/8-balloons.png',detail:'Poppy has eight balloons.'},
-  {word:'9',speech:'Nine',image:'assets/meadow-pals/numbers/9-balls.png',detail:'Doodle counts nine balls.'},
-  {word:'10',speech:'Ten',image:'assets/meadow-pals/numbers/10-stars.png',detail:'The pals found ten stars!'}
+  {word:'0',speech:'Zero',image:'assets/meadow-pals/numbers/0-empty-basket.png',audio:'audio/voice-packs/pip/numbers/001-0.mp3',detail:'An empty basket means zero.'},
+  {word:'1',speech:'One',image:'assets/meadow-pals/numbers/1-apple.png',audio:'audio/voice-packs/pip/numbers/002-1.mp3',detail:'Pip is holding one apple.'},
+  {word:'2',speech:'Two',image:'assets/meadow-pals/numbers/2-birds.png',audio:'audio/voice-packs/poppy/numbers/003-2.mp3',detail:'Poppy found two birds.'},
+  {word:'3',speech:'Three',image:'assets/meadow-pals/numbers/3-ducklings.png',audio:'audio/voice-packs/doodle/numbers/004-3.mp3',detail:'Three ducklings are together.'},
+  {word:'4',speech:'Four',image:'assets/meadow-pals/numbers/4-blocks.png',audio:'audio/voice-packs/pip/numbers/005-4.mp3',detail:'Pip has four blocks.'},
+  {word:'5',speech:'Five',image:'assets/meadow-pals/numbers/5-flowers.png',audio:'audio/voice-packs/poppy/numbers/006-5.mp3',detail:'Poppy sees five flowers.'},
+  {word:'6',speech:'Six',image:'assets/meadow-pals/numbers/6-bubbles.png',audio:'audio/voice-packs/doodle/numbers/007-6.mp3',detail:'Doodle counts six bubbles.'},
+  {word:'7',speech:'Seven',image:'assets/meadow-pals/numbers/7-strawberries.png',audio:'audio/voice-packs/pip/numbers/008-7.mp3',detail:'Pip found seven strawberries.'},
+  {word:'8',speech:'Eight',image:'assets/meadow-pals/numbers/8-balloons.png',audio:'audio/voice-packs/poppy/numbers/009-8.mp3',detail:'Poppy has eight balloons.'},
+  {word:'9',speech:'Nine',image:'assets/meadow-pals/numbers/9-balls.png',audio:'audio/voice-packs/doodle/numbers/010-9.mp3',detail:'Doodle counts nine balls.'},
+  {word:'10',speech:'Ten',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!'}
 ];
 
 window.MEADOW_DATA = {
