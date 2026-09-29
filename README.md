@@ -1,53 +1,38 @@
-# Learning Arcade
+# Meadow Pals · Little Learners
 
-A mobile-first, installable learning app for:
+A calm, mobile-first flash-card app designed for toddlers and their grown-ups.
 
-- U.S. states, capitals, abbreviations, and map shapes
-- Weekly spelling word banks
-- Multiplication facts from 0 × 0 through 9 × 9
-- Editable poem memorization and recitation practice
-- Local learner profiles and a 20-mission four-sector story campaign
-- Six animated story chapters unlocked across the restoration campaign
-- Energy-orb progression, Sentinel reward unlocks, and animated results
-- A profile-local Orb Shop and Locker with five 250-orb cosmetic forms
-- Selector, success, and thinking artwork that follows the equipped Sentinel form throughout the app
-- Question-level mistake tracking with targeted repair rounds
-- Ten-question subject assessments and cumulative parent reports
-- Optional three-life missions with shields, repairs, retries, clues, and an Emergency Reboot
-- A reusable Study Lab for parent-created flashcards, multiple choice, typed answers, and mixed practice
-- CSV import/export for Study Lab sets, with a downloadable weekly-use template
-- A per-profile Monday-through-Sunday Mission Board with completion, parent verification, and optional weekly rewards
-- Named State Quest selections for repeatedly practicing a teacher's current group of states
-- State placement, neighboring-state, region/division sorting, capital speed-run, odd-one-out, and discovery modes
-- Optional, fully reversible Smart Review rounds based on unrepaired mistakes
-- Required Parent Portal PIN controls for editing tools, with practice and the Orb Shop left open
-- One-time onboarding that establishes the PIN and child profile before Student Arcade opens
-- Versioned full-app backups with restore previews and a two-week backup reminder
-- Separate master, music, and sound-effect controls powered through a mobile-safe audio mixer
-- A Circuit Sentinel home-screen icon sized for iPhone and installable-app use
+## Learning center
 
-Everything is static and can be hosted on GitHub Pages. Practice data is stored only in the browser on the current device.
+- Numbers from 0 through 10
+- All 26 letters with a picture-word association
+- Nine colors: red, orange, yellow, pink, purple, green, blue, black, and brown
+- 100 first words with picture cues
+- Short rotating sets, large touch targets, swipe navigation, and built-in spoken labels
+- Local learner profiles with separate progress
+- No scores, streaks, timers, achievements, lives, or unlockables
+- Four gentle background tracks that rotate automatically at a toddler-friendly volume
 
-## Study Lab imports
+## Parent Hub
 
-The included `templates/study-lab-import-template.csv` opens in Excel, Numbers, or Google Sheets. Each row is one question. `set_title`, `question`, and `answer` are required; optional alternate answers and multiple-choice distractors use semicolons inside their cells. Multiple rows with the same set title become one reusable study set.
+The Parent Hub is protected by a four-digit PIN created the first time it is opened. It includes:
 
-## Publish with GitHub Pages
+- A learning snapshot for the active profile
+- Unique cards seen and total exposure by category
+- Approximate learning time and recent activity
+- Profile switching and deletion
+- Local JSON data export, voice settings, PIN change, and progress reset
 
-1. Put these files in the root of a GitHub repository.
-2. In **Settings → Pages**, choose **Deploy from a branch**.
-3. Select the main branch and the repository root.
-4. Open the Pages URL on the iPhone, then use **Share → Add to Home Screen**.
+All profile and reporting data remains in the browser's local storage. Nothing is uploaded.
 
-Ordinary updates do not require replacing the home-screen shortcut. When changing the icon itself, use **Parent Setup → Download backup** before deleting and re-adding the shortcut.
+## Characters and artwork
 
-## Story and armory progression
+Pip the bear, Poppy the bunny, and Doodle the duck are original **Meadow Pals** characters created for this app. They intentionally avoid reliance on licensed entertainment characters. The primary character artwork is stored at `assets/meadow-pals/meadow-pals.png`; the installable app mark is `icon.svg`.
 
-- The prologue is available immediately. Additional chapters unlock after 4, 8, 12, 16, and 20 completed missions.
-- Core Sentinel is included automatically. Ember Cannon, Frost Lance, Volt Disc, Cyclone Boomerang, and Prism Shield each cost 250 Energy Orbs.
-- Purchases, ownership, equipped form, story progress, and viewed chapters are saved separately for each local learner profile.
-- Math Mayhem currently opens the Multiplication Reactor; Division Drive, Addition Array, and Subtraction Circuit are reserved as future sectors.
-- The Orb Shop includes consumable support items, permanent interface cosmetics, ten unlockable mission soundtracks, and full Sentinel forms.
-- Sentinel forms and permanent cosmetics do not change question difficulty or scoring. Support items are limited-use inventory.
+## Running locally
 
-The armory and story assets are original Circuit Sentinel designs created for this project.
+This is a static progressive web app. Serve the repository root with any local web server, or publish it with GitHub Pages. Service-worker caching makes the core app available offline after its first successful load.
+
+## Music
+
+The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins after the first user interaction, rotates automatically, lowers itself while a card name is spoken, and can be paused from the header or Parent Hub.
