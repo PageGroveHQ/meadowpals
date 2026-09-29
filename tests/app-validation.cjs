@@ -32,15 +32,22 @@ for(const card of data.colors){
 assert.equal(groups.people.words.length,5,'people sub-deck must contain five words');
 assert.equal(groups.animals.words.length,15,'animals sub-deck must contain fifteen words');
 assert.equal(groups.food.words.length,10,'food sub-deck must contain ten words');
+assert.equal(Object.keys(groups).length,11,'all eleven first-word sub-decks must be present');
+for(const [key,size] of Object.entries({things:5,play:5,home:10,body:10,clothing:10,nature:10,social:10,feelings:10}))assert.equal(groups[key].words.length,size,`${key} sub-deck must contain ${size} words`);
 for(const group of Object.values(groups))for(const word of group.words)assert(data.words.some(card=>card.word===word),`${word} must exist in the first-word deck`);
+const groupedWords=Object.values(groups).flatMap(group=>group.words);
+assert.equal(groupedWords.length,100,'sub-decks must collectively contain 100 words');
+assert.equal(new Set(groupedWords).size,100,'each first word must belong to exactly one sub-deck');
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
+const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='44'"),'app and cache version must be current');
+assert(app.includes("const APP_VERSION='45'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v45'"),'service worker cache must match the app version');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
-for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal'])assert(html.includes(`id="${id}"`),`missing ${id}`);
+for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid'])assert(html.includes(`id="${id}"`),`missing ${id}`);
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
   assert(fs.existsSync(require('path').join(root,'audio','meadow-pals',track)),`missing music track ${track}`);

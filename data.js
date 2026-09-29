@@ -33,5 +33,13 @@ window.MEADOW_DATA = {
 window.MEADOW_WORD_GROUPS = {
   people:{title:'People',icon:'👨‍👩‍👧',words:['Mommy','Daddy','Baby','Family','Friend']},
   animals:{title:'Animals',icon:'🐾',words:['Dog','Cat','Bird','Fish','Duck','Bear','Bunny','Cow','Pig','Horse','Lion','Monkey','Frog','Bug','Butterfly']},
-  food:{title:'Food & Drink',icon:'🍎',words:['Apple','Banana','Orange','Berry','Milk','Water','Bread','Cheese','Egg','Cookie']}
+  food:{title:'Food & Drink',icon:'🍎',words:['Apple','Banana','Orange','Berry','Milk','Water','Bread','Cheese','Egg','Cookie']},
+  things:{title:'Things That Go',icon:'🚗',words:['Car','Truck','Train','Boat','Plane']},
+  play:{title:'Toys & Play',icon:'🧸',words:['Ball','Book','Bike','Doll','Blocks']},
+  home:{title:'Home & Everyday',icon:'🏠',words:['Cup','Spoon','Plate','Chair','Bed','Bath','Door','Light','Clock','Phone']},
+  body:{title:'Body Parts',icon:'🙌',words:['Head','Eyes','Nose','Mouth','Ears','Hands','Feet','Tummy','Hair','Teeth']},
+  clothing:{title:'Clothing',icon:'👕',words:['Shirt','Pants','Shoes','Socks','Hat','Coat','Dress','Pajamas','Diaper','Boots']},
+  nature:{title:'Nature & Weather',icon:'🌦️',words:['Sun','Moon','Star','Cloud','Rain','Snow','Tree','Flower','Grass','Sky']},
+  social:{title:'Useful Social Words',icon:'👋',words:['Hi','Bye','Yes','No','Please','Thanks','More','All done','Help','Love']},
+  feelings:{title:'Feelings & Describing',icon:'😊',words:['Happy','Sad','Mad','Sleepy','Hungry','Big','Little','Hot','Cold','Gentle']}
 };

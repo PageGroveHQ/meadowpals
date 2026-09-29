@@ -9,10 +9,10 @@
   <meta name="apple-mobile-web-app-title" content="Meadow Pals">
   <meta name="description" content="A warm, playful flash-card learning app for toddlers and their grown-ups.">
   <title>Meadow Pals · Little Learners</title>
-  <link rel="manifest" href="manifest.webmanifest?v=44">
+  <link rel="manifest" href="manifest.webmanifest?v=45">
   <link rel="icon" type="image/png" href="assets/meadow-pals/app-icon.png">
   <link rel="apple-touch-icon" href="assets/meadow-pals/app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=44">
+  <link rel="stylesheet" href="styles.css?v=45">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -37,10 +37,10 @@
   <div class="modal-layer" id="pinModal" hidden><form class="modal pin-modal" id="pinForm"><button type="button" class="modal-close" data-close>×</button><div class="lock-badge">🔒</div><p class="eyebrow">GROWN-UPS ONLY</p><h2 id="pinTitle">Parent Hub</h2><p id="pinHelp">Enter your 4-digit PIN.</p><div class="pin-dots" id="pinDots"><i></i><i></i><i></i><i></i></div><input class="pin-input" id="pinInput" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="4-digit PIN"><p class="form-error" id="pinError"></p><button class="big-button">Continue</button></form></div>
   <div class="modal-layer" id="nameModal" hidden><form class="modal name-modal" id="nameForm"><button type="button" class="modal-close" data-close>×</button><div class="lock-badge">🌼</div><p class="eyebrow">NEW LEARNER</p><h2>What should we call them?</h2><label>First name<input id="newName" maxlength="18" autocomplete="off" placeholder="Name"></label><button class="big-button">Create profile</button></form></div>
 
-  <div class="modal-layer" id="wordGroupModal" hidden><div class="modal word-group-modal"><button type="button" class="modal-close" data-close aria-label="Close">×</button><div class="lock-badge">🌈</div><p class="eyebrow">FIRST WORDS</p><h2>What shall we explore?</h2><p>Choose a little group or explore every word.</p><div class="word-group-grid"><button type="button" data-word-group="people"><span>👨‍👩‍👧</span><strong>People</strong><small>5 words</small></button><button type="button" data-word-group="animals"><span>🐾</span><strong>Animals</strong><small>15 words</small></button><button type="button" data-word-group="food"><span>🍎</span><strong>Food &amp; Drink</strong><small>10 words</small></button><button type="button" data-word-group="all"><span>✨</span><strong>All First Words</strong><small>100 words</small></button></div></div></div>
+  <div class="modal-layer" id="wordGroupModal" hidden><div class="modal word-group-modal"><button type="button" class="modal-close" data-close aria-label="Close">×</button><div class="lock-badge">🌈</div><p class="eyebrow">FIRST WORDS</p><h2>What shall we explore?</h2><p>Choose a little group or explore every word.</p><div class="word-group-grid" id="wordGroupGrid"></div></div></div>
   <div class="parent-hub" id="parentHub" hidden><header><div><p>MEADOW PALS</p><h1>Parent Hub</h1></div><button id="closeParent">Done</button></header><nav><button class="selected" data-parent-tab="overview">Overview</button><button data-parent-tab="learning">Learning</button><button data-parent-tab="profiles">Profiles</button><button data-parent-tab="settings">Settings</button></nav><div class="parent-content" id="parentContent"></div></div>
   <audio id="backgroundMusic" preload="metadata"></audio>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="data.js?v=44"></script><script src="app.js?v=44"></script>
+  <script src="data.js?v=45"></script><script src="app.js?v=45"></script>
 </body>
 </html>
