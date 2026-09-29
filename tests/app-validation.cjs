@@ -38,13 +38,20 @@ for(const group of Object.values(groups))for(const word of group.words)assert(da
 const groupedWords=Object.values(groups).flatMap(group=>group.words);
 assert.equal(groupedWords.length,100,'sub-decks must collectively contain 100 words');
 assert.equal(new Set(groupedWords).size,100,'each first word must belong to exactly one sub-deck');
+for(const word of groups.body.words){
+  const card=data.words.find(item=>item.word===word);
+  assert(card.image,`${word} needs custom Body Parts art`);
+  const imagePath=require('path').join(root,card.image);
+  assert(fs.existsSync(imagePath),`missing Body Parts art ${card.image}`);
+  assert(fs.statSync(imagePath).size>100000,`Body Parts art is unexpectedly small: ${card.image}`);
+}
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='45'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v45'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='46'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v46'"),'service worker cache must match the app version');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
 for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid'])assert(html.includes(`id="${id}"`),`missing ${id}`);

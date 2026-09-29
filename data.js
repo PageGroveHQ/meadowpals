@@ -12,6 +12,11 @@ const NUMBER_CARDS = [
   {word:'10',speech:'Ten',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!'}
 ];
 
+const WORD_ART = Object.fromEntries(['head','eyes','nose','mouth','ears','hands','feet','tummy','hair','teeth'].map(name=>[
+  name.charAt(0).toUpperCase()+name.slice(1),
+  `assets/meadow-pals/words/body-parts/${name}.png`
+]));
+
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
   letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter,index)=>({word:letter,picture:['🍎','🐻','🐱','🐶','🥚','🐸','🍇','🏠','🍦','🧃','🔑','🍃','🌙','🌙','🍊','🐷','👑','🌈','☀️','🐯','☂️','🎻','🐳','📦','🪀','🦓'][index],detail:`${letter} is for ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,speech:`${letter}. ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,audio:`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`})),
@@ -27,7 +32,7 @@ window.MEADOW_DATA = {
     ['Sun','☀️'],['Moon','🌙'],['Star','⭐'],['Cloud','☁️'],['Rain','🌧️'],['Snow','❄️'],['Tree','🌳'],['Flower','🌼'],['Grass','🌱'],['Sky','🌤️'],
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
-  ].map(([word,picture])=>({word,picture,detail:word,speech:word}))
+  ].map(([word,picture])=>({word,picture,image:WORD_ART[word]||'',detail:word,speech:word}))
 };
 
 window.MEADOW_WORD_GROUPS = {
