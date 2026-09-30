@@ -1,4 +1,4 @@
-const CACHE='meadow-pals-v51';
+const CACHE='meadow-pals-v52';
 const LETTER_AUDIO=Array.from({length:26},(_,index)=>`./audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${String.fromCharCode(97+index)}.mp3`);
 const COLOR_AUDIO=['red','orange','yellow','pink','purple','green','blue','black','brown'].map((color,index)=>`./audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${color}.mp3`);
 const BODY_PART_ART=['head','eyes','nose','mouth','ears','hands','feet','tummy','hair','teeth'].map(name=>`./assets/meadow-pals/words/body-parts/${name}.png`);

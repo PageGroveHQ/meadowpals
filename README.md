@@ -47,3 +47,7 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 4. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`.
 
 Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
+
+## Normalizing character voices
+
+`tools/normalize-voice-pack.ps1` measures every MP3 below `audio/voice-packs/` and writes consistently leveled copies to a separate staging folder. The published voice pack targets -20 LUFS with a -1.5 dB true-peak ceiling. Always validate the staged files before replacing the originals; the script intentionally refuses to write inside the source folder.
