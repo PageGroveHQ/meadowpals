@@ -12,10 +12,33 @@ const NUMBER_CARDS = [
   {word:'10',speech:'Ten',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!'}
 ];
 
-const WORD_ART = Object.fromEntries(['head','eyes','nose','mouth','ears','hands','feet','tummy','hair','teeth'].map(name=>[
-  name.charAt(0).toUpperCase()+name.slice(1),
-  `assets/meadow-pals/words/body-parts/${name}.png`
-]));
+const WORD_ASSETS = {
+  Head:{image:'assets/meadow-pals/words/body-parts/head.png',character:'pip'},
+  Eyes:{image:'assets/meadow-pals/words/body-parts/eyes.png',character:'poppy'},
+  Nose:{image:'assets/meadow-pals/words/body-parts/nose.png',character:'pip'},
+  Mouth:{image:'assets/meadow-pals/words/body-parts/mouth.png',character:'pip'},
+  Ears:{image:'assets/meadow-pals/words/body-parts/ears.png',character:'poppy'},
+  Hands:{image:'assets/meadow-pals/words/body-parts/hands.png',character:'poppy'},
+  Feet:{image:'assets/meadow-pals/words/body-parts/feet.png',character:'doodle'},
+  Tummy:{image:'assets/meadow-pals/words/body-parts/tummy.png',character:'doodle'},
+  Hair:{image:'assets/meadow-pals/words/body-parts/hair.png',character:'pip'},
+  Teeth:{image:'assets/meadow-pals/words/body-parts/teeth.png',character:'poppy'},
+  Dog:{image:'assets/meadow-pals/words/animals/dog.png',character:'pip'},
+  Cat:{image:'assets/meadow-pals/words/animals/cat.png',character:'poppy'},
+  Bird:{image:'assets/meadow-pals/words/animals/bird.png',character:'poppy'},
+  Fish:{image:'assets/meadow-pals/words/animals/fish.png',character:'doodle'},
+  Duck:{image:'assets/meadow-pals/words/animals/duck.png',character:'doodle'},
+  Bear:{image:'assets/meadow-pals/words/animals/bear.png',character:'pip'},
+  Bunny:{image:'assets/meadow-pals/words/animals/bunny.png',character:'poppy'},
+  Cow:{image:'assets/meadow-pals/words/animals/cow.png',character:'pip'},
+  Pig:{image:'assets/meadow-pals/words/animals/pig.png',character:'poppy'},
+  Horse:{image:'assets/meadow-pals/words/animals/horse.png',character:'pip'},
+  Lion:{image:'assets/meadow-pals/words/animals/lion.png',character:'pip'},
+  Monkey:{image:'assets/meadow-pals/words/animals/monkey.png',character:'doodle'},
+  Frog:{image:'assets/meadow-pals/words/animals/frog.png',character:'doodle'},
+  Bug:{image:'assets/meadow-pals/words/animals/bug.png',character:'poppy'},
+  Butterfly:{image:'assets/meadow-pals/words/animals/butterfly.png',character:'poppy'}
+};
 
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
@@ -32,7 +55,7 @@ window.MEADOW_DATA = {
     ['Sun','☀️'],['Moon','🌙'],['Star','⭐'],['Cloud','☁️'],['Rain','🌧️'],['Snow','❄️'],['Tree','🌳'],['Flower','🌼'],['Grass','🌱'],['Sky','🌤️'],
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
-  ].map(([word,picture])=>({word,picture,image:WORD_ART[word]||'',detail:word,speech:word}))
+  ].map(([word,picture])=>{const asset=WORD_ASSETS[word]||{};return {word,picture,image:asset.image||'',character:asset.character||'',detail:word,speech:word}})
 };
 
 window.MEADOW_WORD_GROUPS = {

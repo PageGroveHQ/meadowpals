@@ -45,13 +45,25 @@ for(const word of groups.body.words){
   assert(fs.existsSync(imagePath),`missing Body Parts art ${card.image}`);
   assert(fs.statSync(imagePath).size>100000,`Body Parts art is unexpectedly small: ${card.image}`);
 }
+const expectedCharacters={Head:'pip',Eyes:'poppy',Nose:'pip',Mouth:'pip',Ears:'poppy',Hands:'poppy',Feet:'doodle',Tummy:'doodle',Hair:'pip',Teeth:'poppy',Dog:'pip',Cat:'poppy',Bird:'poppy',Fish:'doodle',Duck:'doodle',Bear:'pip',Bunny:'poppy',Cow:'pip',Pig:'poppy',Horse:'pip',Lion:'pip',Monkey:'doodle',Frog:'doodle',Bug:'poppy',Butterfly:'poppy'};
+for(const word of [...groups.body.words,...groups.animals.words]){
+  const card=data.words.find(item=>item.word===word);
+  assert.equal(card.character,expectedCharacters[word],`${word} must be assigned to the illustrated Meadow Pal`);
+}
+for(const word of groups.animals.words){
+  const card=data.words.find(item=>item.word===word);
+  assert(card.image,`${word} needs custom Animals art`);
+  const imagePath=require('path').join(root,card.image);
+  assert(fs.existsSync(imagePath),`missing Animals art ${card.image}`);
+  assert(fs.statSync(imagePath).size>100000,`Animals art is unexpectedly small: ${card.image}`);
+}
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='46'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v46'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='47'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v47'"),'service worker cache must match the app version');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
 for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid'])assert(html.includes(`id="${id}"`),`missing ${id}`);
