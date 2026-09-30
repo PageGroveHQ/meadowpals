@@ -9,10 +9,10 @@
   <meta name="apple-mobile-web-app-title" content="Meadow Pals">
   <meta name="description" content="A warm, playful flash-card learning app for toddlers and their grown-ups.">
   <title>Meadow Pals · Little Learners</title>
-  <link rel="manifest" href="manifest.webmanifest?v=50">
+  <link rel="manifest" href="manifest.webmanifest?v=51">
   <link rel="icon" type="image/png" href="assets/meadow-pals/app-icon.png">
   <link rel="apple-touch-icon" href="assets/meadow-pals/app-icon.png">
-  <link rel="stylesheet" href="styles.css?v=50">
+  <link rel="stylesheet" href="styles.css?v=51">
 </head>
 <body>
   <div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
@@ -32,15 +32,16 @@
       <section class="gentle-note"><span>🌱</span><p><strong>No scores. No timers. No pressure.</strong><br>Just warm encouragement and plenty of chances to explore.</p></section>
     </section>
     <section class="screen" data-screen="learn"><div class="learn-shell"><div class="learn-top"><button class="round-back" data-route="home" aria-label="Back home">←</button><div><small id="learnKicker">COUNT WITH PIP</small><h1 id="learnTitle">Numbers</h1></div><button class="speak-top" id="speakCard" aria-label="Hear this card">🔊</button></div><div class="progress-track"><i id="progressBar"></i></div><p class="card-count" id="cardCount">1 of 11</p><article class="flash-card" id="flashCard" tabindex="0" role="button" aria-label="Tap to hear this card"><div class="card-sparkles" aria-hidden="true">✦ <span>·</span> ✦</div><div class="picture" id="cardPicture"></div><div class="card-word" id="cardWord"></div><div class="card-detail" id="cardDetail"></div><button class="hear-word" id="hearWord"><span>🔊</span> Hear it</button></article><div class="learn-controls"><button class="nav-card secondary" id="prevCard">←</button><button class="nav-card primary" id="nextCard">Next card <span>→</span></button></div><p class="swipe-hint">You can also swipe the card</p></div></section>
+    <section class="screen" data-screen="find"><div class="find-shell"><div class="learn-top"><button class="round-back" data-route="home" aria-label="Back home">←</button><div><small>FIND IT TOGETHER</small><h1 id="findTitle">First Words</h1></div><button class="speak-top" id="speakFind" aria-label="Hear what to find">🔊</button></div><div class="progress-track"><i id="findProgressBar"></i></div><p class="card-count" id="findCount">1 of 10</p><div class="find-prompt"><span>Can you find…</span><strong id="findWord">Apple?</strong></div><div class="find-choices" id="findChoices"></div><p class="find-feedback" id="findFeedback" role="status" aria-live="polite">Tap a picture</p></div></section>
     <section class="screen" data-screen="profiles"><div class="simple-page"><button class="round-back" data-route="home">←</button><p class="eyebrow">WHO IS LEARNING?</p><h1>Choose a little learner</h1><p class="subcopy">Each profile keeps its own gentle learning history.</p><div class="profile-grid" id="profileGrid"></div><button class="add-profile" id="addProfile">＋ Add a profile</button></div></section>
   </main>
   <div class="modal-layer" id="pinModal" hidden><form class="modal pin-modal" id="pinForm"><button type="button" class="modal-close" data-close>×</button><div class="lock-badge">🔒</div><p class="eyebrow">GROWN-UPS ONLY</p><h2 id="pinTitle">Parent Hub</h2><p id="pinHelp">Enter your 4-digit PIN.</p><div class="pin-dots" id="pinDots"><i></i><i></i><i></i><i></i></div><input class="pin-input" id="pinInput" inputmode="numeric" maxlength="4" autocomplete="off" aria-label="4-digit PIN"><p class="form-error" id="pinError"></p><button class="big-button">Continue</button></form></div>
   <div class="modal-layer" id="nameModal" hidden><form class="modal name-modal" id="nameForm"><button type="button" class="modal-close" data-close>×</button><div class="lock-badge">🌼</div><p class="eyebrow">NEW LEARNER</p><h2>What should we call them?</h2><label>First name<input id="newName" maxlength="18" autocomplete="off" placeholder="Name"></label><button class="big-button">Create profile</button></form></div>
 
-  <div class="modal-layer" id="wordGroupModal" hidden><div class="modal word-group-modal"><button type="button" class="modal-close" data-close aria-label="Close">×</button><div class="lock-badge">🌈</div><p class="eyebrow">FIRST WORDS</p><h2>What shall we explore?</h2><p>Choose a little group or explore every word.</p><div class="word-group-grid" id="wordGroupGrid"></div></div></div>
+  <div class="modal-layer" id="wordGroupModal" hidden><div class="modal word-group-modal"><button type="button" class="modal-close" data-close aria-label="Close">×</button><div class="lock-badge">🌈</div><p class="eyebrow">FIRST WORDS</p><h2>What shall we explore?</h2><p>Choose one group or combine as many as you like.</p><div class="word-group-grid" id="wordGroupGrid"></div><div class="word-mode-picker"><p class="eyebrow">HOW SHALL WE PLAY?</p><div><button type="button" class="selected" data-word-mode="explore"><span>🖼️</span><strong>Explore</strong><small>See and hear cards</small></button><button type="button" data-word-mode="together"><span>🤝</span><strong>Together</strong><small>Grown-up prompts</small></button><button type="button" data-word-mode="find"><span>👀</span><strong>Find It</strong><small>Choose the picture</small></button></div></div><button type="button" class="big-button word-start" id="startWordGroups" disabled>Choose at least one group</button></div></div>
   <div class="parent-hub" id="parentHub" hidden><header><div><p>MEADOW PALS</p><h1>Parent Hub</h1></div><button id="closeParent">Done</button></header><nav><button class="selected" data-parent-tab="overview">Overview</button><button data-parent-tab="learning">Learning</button><button data-parent-tab="profiles">Profiles</button><button data-parent-tab="settings">Settings</button></nav><div class="parent-content" id="parentContent"></div></div>
   <audio id="backgroundMusic" preload="metadata"></audio>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
-  <script src="data.js?v=50"></script><script src="app.js?v=50"></script>
+  <script src="data.js?v=51"></script><script src="app.js?v=51"></script>
 </body>
 </html>

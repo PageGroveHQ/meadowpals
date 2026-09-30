@@ -92,8 +92,30 @@ const WORD_ASSETS = {
   More:{image:'assets/meadow-pals/words/useful-social/more.png',character:'pip'},
   'All done':{image:'assets/meadow-pals/words/useful-social/all-done.png',character:'doodle'},
   Help:{image:'assets/meadow-pals/words/useful-social/help.png',character:'pip'},
-  Love:{image:'assets/meadow-pals/words/useful-social/love.png',character:'poppy'}
+  Love:{image:'assets/meadow-pals/words/useful-social/love.png',character:'poppy'},
+  Cup:{image:'assets/meadow-pals/words/home-everyday/cup.png',character:'pip'},
+  Spoon:{image:'assets/meadow-pals/words/home-everyday/spoon.png',character:'doodle'},
+  Plate:{image:'assets/meadow-pals/words/home-everyday/plate.png',character:'poppy'},
+  Chair:{image:'assets/meadow-pals/words/home-everyday/chair.png',character:'pip'},
+  Bed:{image:'assets/meadow-pals/words/home-everyday/bed.png',character:'doodle'},
+  Bath:{image:'assets/meadow-pals/words/home-everyday/bath.png',character:'poppy'},
+  Door:{image:'assets/meadow-pals/words/home-everyday/door.png',character:'pip'},
+  Light:{image:'assets/meadow-pals/words/home-everyday/light.png',character:'doodle'},
+  Clock:{image:'assets/meadow-pals/words/home-everyday/clock.png',character:'poppy'},
+  Phone:{image:'assets/meadow-pals/words/home-everyday/phone.png',character:'pip'},
+  Shirt:{image:'assets/meadow-pals/words/clothing/shirt.png',character:'pip'},
+  Pants:{image:'assets/meadow-pals/words/clothing/pants.png',character:'doodle'},
+  Shoes:{image:'assets/meadow-pals/words/clothing/shoes.png',character:'poppy'},
+  Socks:{image:'assets/meadow-pals/words/clothing/socks.png',character:'doodle'},
+  Hat:{image:'assets/meadow-pals/words/clothing/hat.png',character:'pip'},
+  Coat:{image:'assets/meadow-pals/words/clothing/coat.png',character:'poppy'},
+  Dress:{image:'assets/meadow-pals/words/clothing/dress.png',character:'poppy'},
+  Pajamas:{character:'doodle'},
+  Diaper:{character:'doodle'},
+  Boots:{character:'pip'}
 };
+
+const wordSlug=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'card';
 
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
@@ -110,7 +132,7 @@ window.MEADOW_DATA = {
     ['Sun','☀️'],['Moon','🌙'],['Star','⭐'],['Cloud','☁️'],['Rain','🌧️'],['Snow','❄️'],['Tree','🌳'],['Flower','🌼'],['Grass','🌱'],['Sky','🌤️'],
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
-  ].map(([word,picture])=>{const asset=WORD_ASSETS[word]||{};return {word,picture,image:asset.image||'',character:asset.character||'',detail:word,speech:word}})
+  ].map(([word,picture],index)=>{const asset=WORD_ASSETS[word]||{},character=asset.character||'';return {word,picture,image:asset.image||'',character,detail:word,speech:word,audio:character?`audio/voice-packs/${character}/words/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:''}})
 };
 
 window.MEADOW_WORD_GROUPS = {

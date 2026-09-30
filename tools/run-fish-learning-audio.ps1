@@ -2,7 +2,7 @@ $ErrorActionPreference = 'Stop'
 
 Write-Host ''
 Write-Host 'Meadow Pals voice generator' -ForegroundColor Cyan
-Write-Host 'This creates A-Z with Poppy and the nine colors with Doodle.'
+Write-Host 'This creates the 100 First Words using each card''s assigned Meadow Pal.'
 Write-Host 'Your Fish Audio key stays hidden and is not saved.'
 Write-Host ''
 
@@ -20,17 +20,12 @@ try {
   }
 
   Write-Host ''
-  Write-Host 'Making Poppy letters (A through Z)...' -ForegroundColor Yellow
-  node tools/fish-voice-pack.mjs --config=$voiceConfig --categories=letters --voices=poppy
-  if ($LASTEXITCODE -ne 0) { throw 'Poppy letter generation did not finish.' }
+  Write-Host 'Making the 100 First Words...' -ForegroundColor Yellow
+  node tools/fish-voice-pack.mjs --config=$voiceConfig --categories=words --assigned=true
+  if ($LASTEXITCODE -ne 0) { throw 'First Words generation did not finish.' }
 
   Write-Host ''
-  Write-Host 'Making Doodle colors...' -ForegroundColor Yellow
-  node tools/fish-voice-pack.mjs --config=$voiceConfig --categories=colors --voices=doodle
-  if ($LASTEXITCODE -ne 0) { throw 'Doodle color generation did not finish.' }
-
-  Write-Host ''
-  Write-Host 'All 35 voice files are ready.' -ForegroundColor Green
+  Write-Host 'All 100 First Words voice files are ready.' -ForegroundColor Green
 }
 finally {
   Pop-Location -ErrorAction SilentlyContinue

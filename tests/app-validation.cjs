@@ -49,27 +49,41 @@ const expectedCharacters={Head:'pip',Eyes:'poppy',Nose:'pip',Mouth:'pip',Ears:'p
 Object.assign(expectedCharacters,{Apple:'pip',Banana:'doodle',Orange:'poppy',Berry:'pip',Milk:'doodle',Water:'poppy',Bread:'pip',Cheese:'doodle',Egg:'poppy',Cookie:'doodle',Happy:'doodle',Sad:'poppy',Mad:'pip',Sleepy:'doodle',Hungry:'pip',Big:'pip',Little:'doodle',Hot:'poppy',Cold:'pip',Gentle:'poppy'});
 Object.assign(expectedCharacters,{Mommy:'poppy',Daddy:'pip',Baby:'doodle',Family:'pip',Friend:'poppy',Car:'pip',Truck:'poppy',Train:'doodle',Boat:'poppy',Plane:'pip',Ball:'doodle',Book:'poppy',Bike:'pip',Doll:'poppy',Blocks:'doodle'});
 Object.assign(expectedCharacters,{Sun:'doodle',Moon:'poppy',Star:'pip',Cloud:'doodle',Rain:'poppy',Snow:'pip',Tree:'pip',Flower:'poppy',Grass:'doodle',Sky:'poppy',Hi:'poppy',Bye:'doodle',Yes:'pip',No:'poppy',Please:'doodle',Thanks:'poppy',More:'pip','All done':'doodle',Help:'pip',Love:'poppy'});
-for(const word of [...groups.body.words,...groups.animals.words,...groups.food.words,...groups.feelings.words,...groups.people.words,...groups.things.words,...groups.play.words,...groups.nature.words,...groups.social.words]){
+Object.assign(expectedCharacters,{Cup:'pip',Spoon:'doodle',Plate:'poppy',Chair:'pip',Bed:'doodle',Bath:'poppy',Door:'pip',Light:'doodle',Clock:'poppy',Phone:'pip',Shirt:'pip',Pants:'doodle',Shoes:'poppy',Socks:'doodle',Hat:'pip',Coat:'poppy',Dress:'poppy',Pajamas:'doodle',Diaper:'doodle',Boots:'pip'});
+for(const word of groupedWords){
   const card=data.words.find(item=>item.word===word);
   assert.equal(card.character,expectedCharacters[word],`${word} must be assigned to the illustrated Meadow Pal`);
 }
-for(const word of [...groups.animals.words,...groups.food.words,...groups.feelings.words,...groups.people.words,...groups.things.words,...groups.play.words,...groups.nature.words,...groups.social.words]){
+const emojiFallbackWords=new Set(['Pajamas','Diaper','Boots']);
+for(const word of groupedWords){
   const card=data.words.find(item=>item.word===word);
-  assert(card.image,`${word} needs custom sub-deck art`);
-  const imagePath=require('path').join(root,card.image);
-  assert(fs.existsSync(imagePath),`missing sub-deck art ${card.image}`);
-  assert(fs.statSync(imagePath).size>100000,`sub-deck art is unexpectedly small: ${card.image}`);
+  if(emojiFallbackWords.has(word))assert(!card.image&&card.picture,`${word} must temporarily use its emoji fallback`);
+  else{
+    assert(card.image,`${word} needs custom sub-deck art`);
+    const imagePath=require('path').join(root,card.image);
+    assert(fs.existsSync(imagePath),`missing sub-deck art ${card.image}`);
+    assert(fs.statSync(imagePath).size>100000,`sub-deck art is unexpectedly small: ${card.image}`);
+  }
+  assert(card.audio,`${word} needs assigned-character audio`);
+  const audioPath=require('path').join(root,card.audio);
+  assert(fs.existsSync(audioPath),`missing First Words audio ${card.audio}`);
+  assert(fs.statSync(audioPath).size>1000,`First Words audio is unexpectedly small: ${card.audio}`);
 }
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='50'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v50'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='51'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v51'"),'service worker cache must match the app version');
+assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
+assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');
+assert(app.includes('selectedWordGroups'),'First Words must support selecting multiple sub-decks');
+assert(app.includes('renderFindRound'),'Find It mode must be implemented');
+assert(app.includes('togetherPrompt'),'Together mode must be implemented');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
-for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid'])assert(html.includes(`id="${id}"`),`missing ${id}`);
+for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
   assert(fs.existsSync(require('path').join(root,'audio','meadow-pals',track)),`missing music track ${track}`);

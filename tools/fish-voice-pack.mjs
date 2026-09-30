@@ -14,6 +14,7 @@ vm.runInNewContext(await fs.readFile(path.join(root,'data.js'),'utf8'),context);
 const data=context.window.MEADOW_DATA;
 const categories=String(args.categories||config.categories||'words').split(',').map(value=>value.trim()).filter(Boolean);
 const requestedVoices=String(args.voices||'').split(',').map(value=>value.trim()).filter(Boolean);
+const assignedOnly=String(args.assigned||'').toLowerCase()==='true';
 const voices=config.voices.filter(voice=>!requestedVoices.length||requestedVoices.includes(voice.name));
 if(!voices.length)throw new Error('No matching voices were found in the config file.');
 
@@ -42,6 +43,7 @@ for(const voice of voices){
     const directory=path.join(root,'audio','voice-packs',voice.name,category);
     await fs.mkdir(directory,{recursive:true});
     for(const [index,card] of data[category].entries()){
+      if(assignedOnly&&category==='words'&&card.character!==voice.name)continue;
       const file=path.join(directory,`${String(index+1).padStart(3,'0')}-${slug(card.word)}.mp3`);
       if(await exists(file)){console.log(`skip ${path.relative(root,file)}`);continue}
       const text=card.speech||card.word;
