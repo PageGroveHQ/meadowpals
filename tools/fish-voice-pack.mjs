@@ -15,6 +15,8 @@ const data=context.window.MEADOW_DATA;
 const categories=String(args.categories||config.categories||'words').split(',').map(value=>value.trim()).filter(Boolean);
 const requestedVoices=String(args.voices||'').split(',').map(value=>value.trim()).filter(Boolean);
 const assignedOnly=String(args.assigned||'').toLowerCase()==='true';
+const language=String(args.language||'en').toLowerCase();
+if(!['en','es'].includes(language))throw new Error(`Unsupported language: ${language}`);
 const voices=config.voices.filter(voice=>!requestedVoices.length||requestedVoices.includes(voice.name));
 if(!voices.length)throw new Error('No matching voices were found in the config file.');
 
@@ -40,14 +42,17 @@ for(const voice of voices){
   if(!voice.referenceId||voice.referenceId.startsWith('REPLACE_'))throw new Error(`Add a Fish Audio referenceId for ${voice.name} in ${configPath}`);
   for(const category of categories){
     if(!data[category])throw new Error(`Unknown category: ${category}`);
-    const directory=path.join(root,'audio','voice-packs',voice.name,category);
+    const localizedCategory=language==='es'?`${category}-es`:category;
+    const directory=path.join(root,'audio','voice-packs',voice.name,localizedCategory);
     await fs.mkdir(directory,{recursive:true});
     for(const [index,card] of data[category].entries()){
       if(assignedOnly&&category==='words'&&card.character!==voice.name)continue;
       const file=path.join(directory,`${String(index+1).padStart(3,'0')}-${slug(card.word)}.mp3`);
       if(await exists(file)){console.log(`skip ${path.relative(root,file)}`);continue}
-      const text=card.speech||card.word;
-      console.log(`make ${voice.name}/${category}: ${text}`);
+      const localized=language==='es'?card.spanish:card;
+      if(!localized?.speech)throw new Error(`Missing ${language} speech for ${category}/${card.word}`);
+      const text=localized.speech;
+      console.log(`make ${voice.name}/${localizedCategory}: ${text}`);
       await synthesize({text,referenceId:voice.referenceId,file});
       await sleep(Number(config.delayMs||350));
     }

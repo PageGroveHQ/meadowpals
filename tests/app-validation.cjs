@@ -14,6 +14,10 @@ assert.equal(data.letters[0].word,'A','letters must begin with A');
 assert.equal(data.letters.at(-1).word,'Z','letters must end with Z');
 assert.equal(data.colors.length,9,'nine requested colors must be present');
 assert.equal(data.words.length,100,'first-word deck must contain 100 cards');
+assert.equal(data.words.filter(card=>card.spanish?.word&&card.spanish?.audio).length,100,'all first words must include Spanish text and audio');
+assert.equal(new Set(data.words.map(card=>card.spanish.word)).size,100,'Spanish first-word labels must be unique');
+assert.equal(data.words[0].spanish.word,'Mamá','the Spanish word bank must begin with Mamá');
+assert.equal(data.words.at(-1).spanish.word,'Suave','the Spanish word bank must end with Suave');
 for(const [key,cards] of Object.entries(data))cards.forEach((card,index)=>{assert(card.word,`${key} card ${index} needs a word`);assert(card.picture||card.image,`${key} card ${index} needs a picture cue`)});
 for(const card of data.numbers){
   assert(card.image,`number ${card.word} needs custom Meadow Pals art`);
@@ -68,22 +72,31 @@ for(const word of groupedWords){
   const audioPath=require('path').join(root,card.audio);
   assert(fs.existsSync(audioPath),`missing First Words audio ${card.audio}`);
   assert(fs.statSync(audioPath).size>1000,`First Words audio is unexpectedly small: ${card.audio}`);
+  assert(card.spanish?.audio,`${word} needs Spanish assigned-character audio`);
+  assert(card.spanish.audio.includes(`/voice-packs/${card.character}/words-es/`),`${word} Spanish audio must use its assigned character`);
+  const spanishAudioPath=require('path').join(root,card.spanish.audio);
+  assert(fs.existsSync(spanishAudioPath),`missing Spanish First Words audio ${card.spanish.audio}`);
+  assert(fs.statSync(spanishAudioPath).size>1000,`Spanish First Words audio is unexpectedly small: ${card.spanish.audio}`);
 }
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='52'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v52'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='53'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v53'"),'service worker cache must match the app version');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
+assert(serviceWorker.includes('...SPANISH_WORD_AUDIO'),'all Spanish First Words audio must be cached for offline use');
 assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');
+assert(app.includes('store.wordLanguage'),'First Words must remember the English or Spanish selection');
+assert(app.includes('cardLanguage'),'First Words must switch text and character audio by language');
 assert(app.includes('selectedWordGroups'),'First Words must support selecting multiple sub-decks');
 assert(app.includes('renderFindRound'),'Find It mode must be implemented');
 assert(app.includes('togetherPrompt'),'Together mode must be implemented');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
 for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
+assert(html.includes('data-word-language="en"')&&html.includes('data-word-language="es"'),'First Words must provide an English/Spanish toggle');
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
   assert(fs.existsSync(require('path').join(root,'audio','meadow-pals',track)),`missing music track ${track}`);

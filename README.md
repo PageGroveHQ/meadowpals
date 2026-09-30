@@ -7,7 +7,7 @@ A calm, mobile-first flash-card app designed for toddlers and their grown-ups.
 - Numbers from 0 through 10
 - All 26 letters with a picture-word association
 - Nine colors: red, orange, yellow, pink, purple, green, blue, black, and brown
-- 100 first words with picture cues
+- 100 first words with English and neutral Latin American Spanish labels, prompts, and character voices
 - Complete category decks, large touch targets, swipe navigation, and built-in spoken labels
 - Local learner profiles with separate progress
 - No scores, streaks, timers, achievements, lives, or unlockables
@@ -44,7 +44,8 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 1. The approved Pip, Poppy, and Doodle voice IDs are stored in `tools/fish-voices.example.json`. Copy it to the ignored `tools/fish-voices.json` only when testing different voices locally.
 2. For a safe 0–10 test, run `tools/run-fish-number-test.ps1`; it requests the API key through a hidden prompt and removes it when generation ends.
 3. Run `tools/run-fish-learning-audio.ps1` to securely generate all 100 First Words with the character assigned to each card.
-4. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`.
+4. Run `tools/run-fish-spanish-audio.ps1` to securely generate the matching 100 Spanish First Words.
+5. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
 
 Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
 

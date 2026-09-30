@@ -117,6 +117,19 @@ const WORD_ASSETS = {
 
 const wordSlug=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'card';
 
+const SPANISH_FIRST_WORDS = [
+  'Mamá','Papá','Bebé','Familia','Amigo','Perro','Gato','Pájaro','Pez','Pato',
+  'Oso','Conejo','Vaca','Cerdo','Caballo','León','Mono','Rana','Insecto','Mariposa',
+  'Pelota','Libro','Carro','Camión','Tren','Barco','Avión','Bicicleta','Muñeca','Bloques',
+  'Vaso','Cuchara','Plato','Silla','Cama','Baño','Puerta','Luz','Reloj','Teléfono',
+  'Manzana','Banana','Naranja','Fresa','Leche','Agua','Pan','Queso','Huevo','Galleta',
+  'Cabeza','Ojos','Nariz','Boca','Orejas','Manos','Pies','Barriga','Pelo','Dientes',
+  'Camisa','Pantalones','Zapatos','Calcetines','Sombrero','Abrigo','Vestido','Pijama','Pañal','Botas',
+  'Sol','Luna','Estrella','Nube','Lluvia','Nieve','Árbol','Flor','Pasto','Cielo',
+  'Hola','Adiós','Sí','No','Por favor','Gracias','Más','Se acabó','Ayuda','Amor',
+  'Feliz','Triste','Enojado','Con sueño','Con hambre','Grande','Pequeño','Caliente','Frío','Suave'
+];
+
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
   letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter,index)=>({word:letter,picture:['🍎','🐻','🐱','🐶','🥚','🐸','🍇','🏠','🍦','🧃','🔑','🍃','🌙','🌙','🍊','🐷','👑','🌈','☀️','🐯','☂️','🎻','🐳','📦','🪀','🦓'][index],detail:`${letter} is for ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,speech:`${letter}. ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,audio:`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`})),
@@ -132,19 +145,19 @@ window.MEADOW_DATA = {
     ['Sun','☀️'],['Moon','🌙'],['Star','⭐'],['Cloud','☁️'],['Rain','🌧️'],['Snow','❄️'],['Tree','🌳'],['Flower','🌼'],['Grass','🌱'],['Sky','🌤️'],
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
-  ].map(([word,picture],index)=>{const asset=WORD_ASSETS[word]||{},character=asset.character||'';return {word,picture,image:asset.image||'',character,detail:word,speech:word,audio:character?`audio/voice-packs/${character}/words/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:''}})
+  ].map(([word,picture],index)=>{const asset=WORD_ASSETS[word]||{},character=asset.character||'',spanish=SPANISH_FIRST_WORDS[index];return {word,picture,image:asset.image||'',character,detail:word,speech:word,audio:character?`audio/voice-packs/${character}/words/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:'',spanish:{word:spanish,detail:spanish,speech:spanish,audio:character?`audio/voice-packs/${character}/words-es/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:''}}})
 };
 
 window.MEADOW_WORD_GROUPS = {
-  people:{title:'People',icon:'👨‍👩‍👧',words:['Mommy','Daddy','Baby','Family','Friend']},
-  animals:{title:'Animals',icon:'🐾',words:['Dog','Cat','Bird','Fish','Duck','Bear','Bunny','Cow','Pig','Horse','Lion','Monkey','Frog','Bug','Butterfly']},
-  food:{title:'Food & Drink',icon:'🍎',words:['Apple','Banana','Orange','Berry','Milk','Water','Bread','Cheese','Egg','Cookie']},
-  things:{title:'Things That Go',icon:'🚗',words:['Car','Truck','Train','Boat','Plane']},
-  play:{title:'Toys & Play',icon:'🧸',words:['Ball','Book','Bike','Doll','Blocks']},
-  home:{title:'Home & Everyday',icon:'🏠',words:['Cup','Spoon','Plate','Chair','Bed','Bath','Door','Light','Clock','Phone']},
-  body:{title:'Body Parts',icon:'🙌',words:['Head','Eyes','Nose','Mouth','Ears','Hands','Feet','Tummy','Hair','Teeth']},
-  clothing:{title:'Clothing',icon:'👕',words:['Shirt','Pants','Shoes','Socks','Hat','Coat','Dress','Pajamas','Diaper','Boots']},
-  nature:{title:'Nature & Weather',icon:'🌦️',words:['Sun','Moon','Star','Cloud','Rain','Snow','Tree','Flower','Grass','Sky']},
-  social:{title:'Useful Social Words',icon:'👋',words:['Hi','Bye','Yes','No','Please','Thanks','More','All done','Help','Love']},
-  feelings:{title:'Feelings & Describing',icon:'😊',words:['Happy','Sad','Mad','Sleepy','Hungry','Big','Little','Hot','Cold','Gentle']}
+  people:{title:'People',spanishTitle:'Personas',icon:'👨‍👩‍👧',words:['Mommy','Daddy','Baby','Family','Friend']},
+  animals:{title:'Animals',spanishTitle:'Animales',icon:'🐾',words:['Dog','Cat','Bird','Fish','Duck','Bear','Bunny','Cow','Pig','Horse','Lion','Monkey','Frog','Bug','Butterfly']},
+  food:{title:'Food & Drink',spanishTitle:'Comida y bebida',icon:'🍎',words:['Apple','Banana','Orange','Berry','Milk','Water','Bread','Cheese','Egg','Cookie']},
+  things:{title:'Things That Go',spanishTitle:'Transportes',icon:'🚗',words:['Car','Truck','Train','Boat','Plane']},
+  play:{title:'Toys & Play',spanishTitle:'Juegos y juguetes',icon:'🧸',words:['Ball','Book','Bike','Doll','Blocks']},
+  home:{title:'Home & Everyday',spanishTitle:'La casa',icon:'🏠',words:['Cup','Spoon','Plate','Chair','Bed','Bath','Door','Light','Clock','Phone']},
+  body:{title:'Body Parts',spanishTitle:'Partes del cuerpo',icon:'🙌',words:['Head','Eyes','Nose','Mouth','Ears','Hands','Feet','Tummy','Hair','Teeth']},
+  clothing:{title:'Clothing',spanishTitle:'Ropa',icon:'👕',words:['Shirt','Pants','Shoes','Socks','Hat','Coat','Dress','Pajamas','Diaper','Boots']},
+  nature:{title:'Nature & Weather',spanishTitle:'Naturaleza y clima',icon:'🌦️',words:['Sun','Moon','Star','Cloud','Rain','Snow','Tree','Flower','Grass','Sky']},
+  social:{title:'Useful Social Words',spanishTitle:'Palabras sociales',icon:'👋',words:['Hi','Bye','Yes','No','Please','Thanks','More','All done','Help','Love']},
+  feelings:{title:'Feelings & Describing',spanishTitle:'Sentimientos',icon:'😊',words:['Happy','Sad','Mad','Sleepy','Hungry','Big','Little','Hot','Cold','Gentle']}
 };
