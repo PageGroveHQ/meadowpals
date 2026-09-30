@@ -57,7 +57,22 @@ const WORD_ASSETS = {
   Little:{image:'assets/meadow-pals/words/feelings-describing/little.png',character:'doodle'},
   Hot:{image:'assets/meadow-pals/words/feelings-describing/hot.png',character:'poppy'},
   Cold:{image:'assets/meadow-pals/words/feelings-describing/cold.png',character:'pip'},
-  Gentle:{image:'assets/meadow-pals/words/feelings-describing/gentle.png',character:'poppy'}
+  Gentle:{image:'assets/meadow-pals/words/feelings-describing/gentle.png',character:'poppy'},
+  Mommy:{image:'assets/meadow-pals/words/people/mommy.png',character:'poppy'},
+  Daddy:{image:'assets/meadow-pals/words/people/daddy.png',character:'pip'},
+  Baby:{image:'assets/meadow-pals/words/people/baby.png',character:'doodle'},
+  Family:{image:'assets/meadow-pals/words/people/family.png',character:'pip'},
+  Friend:{image:'assets/meadow-pals/words/people/friend.png',character:'poppy'},
+  Car:{image:'assets/meadow-pals/words/things-that-go/car.png',character:'pip'},
+  Truck:{image:'assets/meadow-pals/words/things-that-go/truck.png',character:'poppy'},
+  Train:{image:'assets/meadow-pals/words/things-that-go/train.png',character:'doodle'},
+  Boat:{image:'assets/meadow-pals/words/things-that-go/boat.png',character:'poppy'},
+  Plane:{image:'assets/meadow-pals/words/things-that-go/plane.png',character:'pip'},
+  Ball:{image:'assets/meadow-pals/words/toys-play/ball.png',character:'doodle'},
+  Book:{image:'assets/meadow-pals/words/toys-play/book.png',character:'poppy'},
+  Bike:{image:'assets/meadow-pals/words/toys-play/bike.png',character:'pip'},
+  Doll:{image:'assets/meadow-pals/words/toys-play/doll.png',character:'poppy'},
+  Blocks:{image:'assets/meadow-pals/words/toys-play/blocks.png',character:'doodle'}
 };
 
 window.MEADOW_DATA = {
