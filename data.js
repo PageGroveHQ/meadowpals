@@ -37,7 +37,27 @@ const WORD_ASSETS = {
   Monkey:{image:'assets/meadow-pals/words/animals/monkey.png',character:'doodle'},
   Frog:{image:'assets/meadow-pals/words/animals/frog.png',character:'doodle'},
   Bug:{image:'assets/meadow-pals/words/animals/bug.png',character:'poppy'},
-  Butterfly:{image:'assets/meadow-pals/words/animals/butterfly.png',character:'poppy'}
+  Butterfly:{image:'assets/meadow-pals/words/animals/butterfly.png',character:'poppy'},
+  Apple:{image:'assets/meadow-pals/words/food-drink/apple.png',character:'pip'},
+  Banana:{image:'assets/meadow-pals/words/food-drink/banana.png',character:'doodle'},
+  Orange:{image:'assets/meadow-pals/words/food-drink/orange.png',character:'poppy'},
+  Berry:{image:'assets/meadow-pals/words/food-drink/berry.png',character:'pip'},
+  Milk:{image:'assets/meadow-pals/words/food-drink/milk.png',character:'doodle'},
+  Water:{image:'assets/meadow-pals/words/food-drink/water.png',character:'poppy'},
+  Bread:{image:'assets/meadow-pals/words/food-drink/bread.png',character:'pip'},
+  Cheese:{image:'assets/meadow-pals/words/food-drink/cheese.png',character:'doodle'},
+  Egg:{image:'assets/meadow-pals/words/food-drink/egg.png',character:'poppy'},
+  Cookie:{image:'assets/meadow-pals/words/food-drink/cookie.png',character:'doodle'},
+  Happy:{image:'assets/meadow-pals/words/feelings-describing/happy.png',character:'doodle'},
+  Sad:{image:'assets/meadow-pals/words/feelings-describing/sad.png',character:'poppy'},
+  Mad:{image:'assets/meadow-pals/words/feelings-describing/mad.png',character:'pip'},
+  Sleepy:{image:'assets/meadow-pals/words/feelings-describing/sleepy.png',character:'doodle'},
+  Hungry:{image:'assets/meadow-pals/words/feelings-describing/hungry.png',character:'pip'},
+  Big:{image:'assets/meadow-pals/words/feelings-describing/big.png',character:'pip'},
+  Little:{image:'assets/meadow-pals/words/feelings-describing/little.png',character:'doodle'},
+  Hot:{image:'assets/meadow-pals/words/feelings-describing/hot.png',character:'poppy'},
+  Cold:{image:'assets/meadow-pals/words/feelings-describing/cold.png',character:'pip'},
+  Gentle:{image:'assets/meadow-pals/words/feelings-describing/gentle.png',character:'poppy'}
 };
 
 window.MEADOW_DATA = {
