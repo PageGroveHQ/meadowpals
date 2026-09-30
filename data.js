@@ -72,7 +72,27 @@ const WORD_ASSETS = {
   Book:{image:'assets/meadow-pals/words/toys-play/book.png',character:'poppy'},
   Bike:{image:'assets/meadow-pals/words/toys-play/bike.png',character:'pip'},
   Doll:{image:'assets/meadow-pals/words/toys-play/doll.png',character:'poppy'},
-  Blocks:{image:'assets/meadow-pals/words/toys-play/blocks.png',character:'doodle'}
+  Blocks:{image:'assets/meadow-pals/words/toys-play/blocks.png',character:'doodle'},
+  Sun:{image:'assets/meadow-pals/words/nature-weather/sun.png',character:'doodle'},
+  Moon:{image:'assets/meadow-pals/words/nature-weather/moon.png',character:'poppy'},
+  Star:{image:'assets/meadow-pals/words/nature-weather/star.png',character:'pip'},
+  Cloud:{image:'assets/meadow-pals/words/nature-weather/cloud.png',character:'doodle'},
+  Rain:{image:'assets/meadow-pals/words/nature-weather/rain.png',character:'poppy'},
+  Snow:{image:'assets/meadow-pals/words/nature-weather/snow.png',character:'pip'},
+  Tree:{image:'assets/meadow-pals/words/nature-weather/tree.png',character:'pip'},
+  Flower:{image:'assets/meadow-pals/words/nature-weather/flower.png',character:'poppy'},
+  Grass:{image:'assets/meadow-pals/words/nature-weather/grass.png',character:'doodle'},
+  Sky:{image:'assets/meadow-pals/words/nature-weather/sky.png',character:'poppy'},
+  Hi:{image:'assets/meadow-pals/words/useful-social/hi.png',character:'poppy'},
+  Bye:{image:'assets/meadow-pals/words/useful-social/bye.png',character:'doodle'},
+  Yes:{image:'assets/meadow-pals/words/useful-social/yes.png',character:'pip'},
+  No:{image:'assets/meadow-pals/words/useful-social/no.png',character:'poppy'},
+  Please:{image:'assets/meadow-pals/words/useful-social/please.png',character:'doodle'},
+  Thanks:{image:'assets/meadow-pals/words/useful-social/thanks.png',character:'poppy'},
+  More:{image:'assets/meadow-pals/words/useful-social/more.png',character:'pip'},
+  'All done':{image:'assets/meadow-pals/words/useful-social/all-done.png',character:'doodle'},
+  Help:{image:'assets/meadow-pals/words/useful-social/help.png',character:'pip'},
+  Love:{image:'assets/meadow-pals/words/useful-social/love.png',character:'poppy'}
 };
 
 window.MEADOW_DATA = {
