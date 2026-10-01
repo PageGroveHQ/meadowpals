@@ -30,6 +30,8 @@ for(const card of data.numbers){
   assert(fs.existsSync(require('path').join(root,card.image)),`missing number art ${card.image}`);
   assert(card.audio,`number ${card.word} needs a Meadow Pals voice`);
   assert(fs.existsSync(require('path').join(root,card.audio)),`missing number audio ${card.audio}`);
+  assert(card.spanish?.audio?.includes(`/voice-packs-es/${card.character}/numbers-es/`),`number ${card.word} needs its native-Spanish character voice`);
+  assert(fs.existsSync(require('path').join(root,card.spanish.audio)),`missing Spanish number audio ${card.spanish.audio}`);
 }
 for(const card of data.letters){
   assert(card.image,`letter ${card.word} needs custom Meadow Pals art`);
@@ -40,18 +42,24 @@ for(const card of data.letters){
 for(const card of data.lettersEs){
   assert(card.image,`Spanish letter ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing Spanish letter art ${card.image}`);
+  assert(card.audio?.includes(`/voice-packs-es/${card.character}/letters-es/`),`Spanish letter ${card.word} needs its native-Spanish character voice`);
+  assert(fs.existsSync(require('path').join(root,card.audio)),`missing Spanish letter audio ${card.audio}`);
 }
 for(const card of data.colors){
   assert(card.image,`color ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing color art ${card.image}`);
   assert(card.audio,`color ${card.word} needs Doodle's voice`);
   assert(fs.existsSync(require('path').join(root,card.audio)),`missing color audio ${card.audio}`);
+  assert(card.spanish?.audio?.includes('/voice-packs-es/doodle/colors-es/'),`color ${card.word} needs Doodle's native-Spanish voice`);
+  assert(fs.existsSync(require('path').join(root,card.spanish.audio)),`missing Spanish color audio ${card.spanish.audio}`);
 }
 for(const card of data.shapes){
   assert(card.image,`shape ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing shape art ${card.image}`);
   assert(card.audio,`shape ${card.word} needs an assigned Meadow Pal voice`);
   assert(fs.existsSync(require('path').join(root,card.audio)),`missing shape audio ${card.audio}`);
+  assert(card.spanish?.audio?.includes(`/voice-packs-es/${card.character}/shapes-es/`),`shape ${card.word} needs its native-Spanish character voice`);
+  assert(fs.existsSync(require('path').join(root,card.spanish.audio)),`missing Spanish shape audio ${card.spanish.audio}`);
 }
 assert.equal(groups.people.words.length,5,'people sub-deck must contain five words');
 assert.equal(groups.animals.words.length,15,'animals sub-deck must contain fifteen words');
@@ -89,7 +97,7 @@ for(const word of groupedWords){
   assert(fs.existsSync(audioPath),`missing First Words audio ${card.audio}`);
   assert(fs.statSync(audioPath).size>1000,`First Words audio is unexpectedly small: ${card.audio}`);
   assert(card.spanish?.audio,`${word} needs Spanish assigned-character audio`);
-  assert(card.spanish.audio.includes(`/voice-packs/${card.character}/words-es/`),`${word} Spanish audio must use its assigned character`);
+  assert(card.spanish.audio.includes(`/voice-packs-es/${card.character}/words-es/`),`${word} Spanish audio must use its assigned character`);
   const spanishAudioPath=require('path').join(root,card.spanish.audio);
   assert(fs.existsSync(spanishAudioPath),`missing Spanish First Words audio ${card.spanish.audio}`);
   assert(fs.statSync(spanishAudioPath).size>1000,`Spanish First Words audio is unexpectedly small: ${card.spanish.audio}`);
@@ -98,26 +106,31 @@ const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("lettersEs:{title:'Alfabeto español',kicker:'APRENDE CON POPPY',size:27"),'Spanish sessions must include all 27 letters');
-assert(app.includes("shapes:{title:'Shapes',kicker:'SHAPES WITH THE PALS',size:9"),'shape sessions must include all nine shapes');
-assert(app.includes("colorsShapes:{title:'Colors & Shapes',kicker:'MIX THEM UP',size:18"),'mixed sessions must include all colors and shapes');
+assert(app.includes("shapes:{title:'Shapes',spanishTitle:'Formas'")&&app.includes("size:9,color:'#e7edf8'"),'shape sessions must include all nine shapes');
+assert(app.includes("colorsShapes:{title:'Colors & Shapes',spanishTitle:'Colores y formas'")&&app.includes("size:18,color:'#eef0dc'"),'mixed sessions must include all colors and shapes');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("['colors','shapes','colorsShapes','words'].includes(key)"),'colors, shapes, mixed, and word decks must shuffle');
-assert(app.includes("const APP_VERSION='57'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v57'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='58'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v58'"),'service worker cache must match the app version');
 for(const cacheGroup of ['...LETTER_ART','...COLOR_ART','...SHAPE_ART','...SPANISH_LETTER_ART'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
 assert(serviceWorker.includes('...SHAPE_AUDIO_FILES'),'all shape audio must be cached for offline use');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
 assert(serviceWorker.includes('...SPANISH_WORD_AUDIO'),'all Spanish First Words audio must be cached for offline use');
+for(const cacheGroup of ['...SPANISH_NUMBER_AUDIO_FILES','...SPANISH_LETTER_AUDIO_FILES','...SPANISH_COLOR_AUDIO','...SPANISH_SHAPE_AUDIO_FILES'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
 assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');
 assert(app.includes('store.wordLanguage'),'First Words must remember the English or Spanish selection');
+assert(app.includes('store.conceptLanguage'),'Colors and Shapes must remember the English or Spanish selection');
+assert(app.includes("startCategory('numbers',null,'','explore',button.dataset.numberLanguage)"),'Numbers must provide English and Spanish decks');
 assert(app.includes('cardLanguage'),'First Words must switch text and character audio by language');
 assert(app.includes('selectedWordGroups'),'First Words must support selecting multiple sub-decks');
 assert(app.includes('renderFindRound'),'Find It mode must be implemented');
 assert(app.includes('togetherPrompt'),'Together mode must be implemented');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
-for(const id of ['parentHub','pinModal','profileGrid','flashCard','openLetters','letterLanguageModal','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','openColorShapes','colorShapeModal','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
+for(const id of ['parentHub','pinModal','profileGrid','flashCard','openNumbers','numberLanguageModal','openLetters','letterLanguageModal','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','openColorShapes','colorShapeModal','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
 assert(html.includes('data-word-language="en"')&&html.includes('data-word-language="es"'),'First Words must provide an English/Spanish toggle');
+assert(html.includes('data-number-language="en"')&&html.includes('data-number-language="es"'),'Numbers must provide an English/Spanish choice');
+assert(html.includes('data-concept-language="en"')&&html.includes('data-concept-language="es"'),'Colors and Shapes must provide an English/Spanish toggle');
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
   assert(fs.existsSync(require('path').join(root,'audio','meadow-pals',track)),`missing music track ${track}`);

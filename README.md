@@ -4,11 +4,11 @@ A calm, mobile-first flash-card app designed for toddlers and their grown-ups.
 
 ## Learning center
 
-- Numbers from 0 through 10
+- Numbers from 0 through 10 in English and Spanish
 - All 26 English letters and all 27 Spanish letters, including Ñ, with picture-word associations
-- Nine colors: red, orange, yellow, pink, purple, green, blue, black, and brown
-- Nine shapes, plus a mixed Colors & Shapes deck
-- 100 first words with English and neutral Latin American Spanish labels, prompts, and character voices
+- Nine colors in English and Spanish: red, orange, yellow, pink, purple, green, blue, black, and brown
+- Nine shapes, plus a mixed Colors & Shapes deck, in English and Spanish
+- 100 first words with English and neutral Latin American Spanish labels, prompts, and native-Spanish character voices
 - Complete category decks, large touch targets, swipe navigation, and built-in spoken labels
 - Local learner profiles with separate progress
 - No scores, streaks, timers, achievements, lives, or unlockables
@@ -50,7 +50,7 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 6. Run `tools/run-fish-all-spanish-audio.ps1` to replace every translated clip with the approved native-Spanish Pip, Poppy, and Doodle voices.
 7. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
 
-Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
+Generated source audio is written under `audio/voice-packs/<voice>/<category>/`. The published, normalized native-Spanish pack lives under `audio/voice-packs-es/<voice>/<category-es>/`. Do not commit the API key or put it in the JSON file.
 
 ## Normalizing character voices
 

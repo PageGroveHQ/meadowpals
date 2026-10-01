@@ -1,3 +1,6 @@
+const audioSlug=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'card';
+const spanishAudioPath=(character,category,index,word)=>`audio/voice-packs-es/${character}/${category}-es/${String(index+1).padStart(3,'0')}-${audioSlug(word)}.mp3`;
+
 const NUMBER_CARDS = [
   {word:'0',speech:'Zero',character:'pip',image:'assets/meadow-pals/numbers/0-empty-basket.png',audio:'audio/voice-packs/pip/numbers/001-0.mp3',detail:'An empty basket means zero.',spanish:{word:'0',speech:'Cero',detail:'Una canasta vacía significa cero.',audio:''}},
   {word:'1',speech:'One',character:'pip',image:'assets/meadow-pals/numbers/1-apple.png',audio:'audio/voice-packs/pip/numbers/002-1.mp3',detail:'Pip is holding one apple.',spanish:{word:'1',speech:'Uno',detail:'Pip sostiene una manzana.',audio:''}},
@@ -11,6 +14,7 @@ const NUMBER_CARDS = [
   {word:'9',speech:'Nine',character:'doodle',image:'assets/meadow-pals/numbers/9-balls.png',audio:'audio/voice-packs/doodle/numbers/010-9.mp3',detail:'Doodle counts nine balls.',spanish:{word:'9',speech:'Nueve',detail:'Doodle cuenta nueve pelotas.',audio:''}},
   {word:'10',speech:'Ten',character:'pip',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!',spanish:{word:'10',speech:'Diez',detail:'¡Los amigos encontraron diez estrellas!',audio:''}}
 ];
+NUMBER_CARDS.forEach((card,index)=>card.spanish.audio=spanishAudioPath(card.character,'numbers',index,card.word));
 
 const WORD_ASSETS = {
   Head:{image:'assets/meadow-pals/words/body-parts/head.png',character:'pip'},
@@ -115,7 +119,7 @@ const WORD_ASSETS = {
   Boots:{image:'assets/meadow-pals/words/clothing/boots.png',character:'pip'}
 };
 
-const wordSlug=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'card';
+const wordSlug=audioSlug;
 
 const SPANISH_FIRST_WORDS = [
   'Mamá','Papá','Bebé','Familia','Amigo','Perro','Gato','Pájaro','Pez','Pato',
@@ -172,7 +176,7 @@ const COLOR_CARDS = [
   ['Red','Rojo','#ef5d5d','red'],['Orange','Naranja','#f59c45','orange'],['Yellow','Amarillo','#f6cf4a','yellow'],
   ['Pink','Rosa','#f49abb','pink'],['Purple','Morado','#9b79d1','purple'],['Green','Verde','#70b978','green'],
   ['Blue','Azul','#5b9bd5','blue'],['Black','Negro','#343643','black'],['Brown','Marrón','#95664b','brown']
-].map(([word,spanishWord,color,slug],index)=>({word,image:`assets/meadow-pals/colors/${slug}.png`,character:'doodle',detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:`${spanishWord} es un color maravilloso`,speech:spanishWord,audio:''}}));
+].map(([word,spanishWord,color,slug],index)=>({word,image:`assets/meadow-pals/colors/${slug}.png`,character:'doodle',detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:`${spanishWord} es un color maravilloso`,speech:spanishWord,audio:spanishAudioPath('doodle','colors',index,word)}}));
 
 const SHAPE_CARDS = [
   ['Circle','Círculo','circle','A ball is shaped like a circle','Una pelota tiene forma de círculo'],
@@ -184,7 +188,7 @@ const SHAPE_CARDS = [
   ['Star','Estrella','star','A star has five bright points','Una estrella tiene cinco puntas brillantes'],
   ['Heart','Corazón','heart','A heart is a loving shape','Un corazón es una forma llena de amor'],
   ['Crescent','Media luna','crescent','The moon can look like a crescent','La luna puede verse como una media luna']
-].map(([word,spanishWord,slug,detail,spanishDetail],index)=>{const character=['doodle','pip','poppy'][index%3];return {word,image:`assets/meadow-pals/shapes/${slug}.png`,character,detail,speech:word,audio:`audio/voice-packs/${character}/shapes/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:spanishDetail,speech:spanishWord,audio:''}}});
+].map(([word,spanishWord,slug,detail,spanishDetail],index)=>{const character=['doodle','pip','poppy'][index%3];return {word,image:`assets/meadow-pals/shapes/${slug}.png`,character,detail,speech:word,audio:`audio/voice-packs/${character}/shapes/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:spanishDetail,speech:spanishWord,audio:spanishAudioPath(character,'shapes',index,word)}}});
 
 const SPANISH_LETTER_EXAMPLES = [
   ['A','Agua','assets/meadow-pals/words/food-drink/water.png'],
@@ -218,7 +222,7 @@ const SPANISH_LETTER_EXAMPLES = [
 
 const SPANISH_LETTER_CHARACTERS = ['poppy','doodle','pip','poppy','pip','poppy','poppy','poppy','poppy','doodle','pip','pip','pip','poppy','poppy','pip','doodle','doodle','doodle','doodle','doodle','pip','pip','poppy','doodle','pip','poppy'];
 const SPANISH_LETTER_CARDS = SPANISH_LETTER_EXAMPLES.map(([letter,example,image],index)=>({
-  word:letter,image,character:SPANISH_LETTER_CHARACTERS[index],detail:`${letter} de ${example.toLowerCase()}`,speech:`${letter}. ${example}`,audio:''
+  word:letter,image,character:SPANISH_LETTER_CHARACTERS[index],detail:`${letter} de ${example.toLowerCase()}`,speech:`${letter}. ${example}`,audio:`audio/voice-packs-es/${SPANISH_LETTER_CHARACTERS[index]}/letters-es/${String(index+1).padStart(3,'0')}-${audioSlug(letter)}.mp3`
 }));
 
 window.MEADOW_DATA = {
@@ -239,7 +243,7 @@ window.MEADOW_DATA = {
     ['Sun','☀️'],['Moon','🌙'],['Star','⭐'],['Cloud','☁️'],['Rain','🌧️'],['Snow','❄️'],['Tree','🌳'],['Flower','🌼'],['Grass','🌱'],['Sky','🌤️'],
     ['Hi','👋'],['Bye','👋'],['Yes','👍'],['No','🙅'],['Please','🙏'],['Thanks','💛'],['More','➕'],['All done','✅'],['Help','🤝'],['Love','❤️'],
     ['Happy','😊'],['Sad','😢'],['Mad','😠'],['Sleepy','😴'],['Hungry','😋'],['Big','🐘'],['Little','🐭'],['Hot','🔥'],['Cold','🧊'],['Gentle','🤲']
-  ].map(([word,picture],index)=>{const asset=WORD_ASSETS[word]||{},character=asset.character||'',spanish=SPANISH_FIRST_WORDS[index];return {word,picture,image:asset.image||'',character,detail:word,speech:word,audio:character?`audio/voice-packs/${character}/words/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:'',spanish:{word:spanish,detail:spanish,speech:spanish,audio:character?`audio/voice-packs/${character}/words-es/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:''}}})
+  ].map(([word,picture],index)=>{const asset=WORD_ASSETS[word]||{},character=asset.character||'',spanish=SPANISH_FIRST_WORDS[index];return {word,picture,image:asset.image||'',character,detail:word,speech:word,audio:character?`audio/voice-packs/${character}/words/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:'',spanish:{word:spanish,detail:spanish,speech:spanish,audio:character?`audio/voice-packs-es/${character}/words-es/${String(index+1).padStart(3,'0')}-${wordSlug(word)}.mp3`:''}}})
 };
 
 window.MEADOW_WORD_GROUPS = {
