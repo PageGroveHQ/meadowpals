@@ -130,10 +130,68 @@ const SPANISH_FIRST_WORDS = [
   'Feliz','Triste','Enojado','Con sueño','Con hambre','Grande','Pequeño','Caliente','Frío','Suave'
 ];
 
+const LETTER_EXAMPLES = [
+  ['A','Apple','assets/meadow-pals/words/food-drink/apple.png'],
+  ['B','Bear','assets/meadow-pals/words/animals/bear.png'],
+  ['C','Cat','assets/meadow-pals/words/animals/cat.png'],
+  ['D','Dog','assets/meadow-pals/words/animals/dog.png'],
+  ['E','Egg','assets/meadow-pals/words/food-drink/egg.png'],
+  ['F','Frog','assets/meadow-pals/words/animals/frog.png'],
+  ['G','Grass','assets/meadow-pals/words/nature-weather/grass.png'],
+  ['H','Hat','assets/meadow-pals/words/clothing/hat.png'],
+  ['I','Ice cream','assets/meadow-pals/letters/i-ice-cream.png'],
+  ['J','Juice','assets/meadow-pals/letters/j-juice.png'],
+  ['K','Key','assets/meadow-pals/letters/k-key.png'],
+  ['L','Lion','assets/meadow-pals/words/animals/lion.png'],
+  ['M','Moon','assets/meadow-pals/words/nature-weather/moon.png'],
+  ['N','Nose','assets/meadow-pals/words/body-parts/nose.png'],
+  ['O','Orange','assets/meadow-pals/words/food-drink/orange.png'],
+  ['P','Pig','assets/meadow-pals/words/animals/pig.png'],
+  ['Q','Queen','assets/meadow-pals/letters/q-queen.png'],
+  ['R','Rain','assets/meadow-pals/words/nature-weather/rain.png'],
+  ['S','Sun','assets/meadow-pals/words/nature-weather/sun.png'],
+  ['T','Tree','assets/meadow-pals/words/nature-weather/tree.png'],
+  ['U','Umbrella','assets/meadow-pals/words/nature-weather/rain.png'],
+  ['V','Violin','assets/meadow-pals/letters/v-violin.png'],
+  ['W','Water','assets/meadow-pals/words/food-drink/water.png'],
+  ['X','Box','assets/meadow-pals/letters/x-box.png'],
+  ['Y','Yes','assets/meadow-pals/words/useful-social/yes.png'],
+  ['Z','Zebra','assets/meadow-pals/letters/z-zebra.png']
+];
+
+const LETTER_AUDIO_REFRESH = new Set(['G','H','L','N','R','T','W','Y']);
+const LETTER_CARDS = LETTER_EXAMPLES.map(([letter,example,image],index)=>({
+  word:letter,
+  image,
+  detail:`${letter} is for ${example.toLowerCase()}`,
+  speech:`${letter}. ${example}`,
+  audio:LETTER_AUDIO_REFRESH.has(letter)?'':`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`
+}));
+
+const COLOR_CARDS = [
+  ['Red','#ef5d5d','red'],['Orange','#f59c45','orange'],['Yellow','#f6cf4a','yellow'],
+  ['Pink','#f49abb','pink'],['Purple','#9b79d1','purple'],['Green','#70b978','green'],
+  ['Blue','#5b9bd5','blue'],['Black','#343643','black'],['Brown','#95664b','brown']
+].map(([word,color,slug],index)=>({word,image:`assets/meadow-pals/colors/${slug}.png`,detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${slug}.mp3`}));
+
+const SHAPE_CARDS = [
+  ['Circle','circle','A ball is shaped like a circle'],
+  ['Square','square','A block has a square face'],
+  ['Triangle','triangle','A sandwich can be a triangle'],
+  ['Rectangle','rectangle','A picture frame can be a rectangle'],
+  ['Oval','oval','An egg is shaped like an oval'],
+  ['Diamond','diamond','A kite can be a diamond'],
+  ['Star','star','A star has five bright points'],
+  ['Heart','heart','A heart is a loving shape'],
+  ['Crescent','crescent','The moon can look like a crescent']
+].map(([word,slug,detail])=>({word,image:`assets/meadow-pals/shapes/${slug}.png`,detail,speech:word,audio:''}));
+
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
-  letters: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map((letter,index)=>({word:letter,picture:['🍎','🐻','🐱','🐶','🥚','🐸','🍇','🏠','🍦','🧃','🔑','🍃','🌙','🌙','🍊','🐷','👑','🌈','☀️','🐯','☂️','🎻','🐳','📦','🪀','🦓'][index],detail:`${letter} is for ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,speech:`${letter}. ${['apple','bear','cat','dog','egg','frog','grapes','house','ice cream','juice','key','leaf','moon','night','orange','pig','queen','rainbow','sun','tiger','umbrella','violin','whale','box','yo-yo','zebra'][index]}`,audio:`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`})),
-  colors: [['Red','#ef5d5d','🍓'],['Orange','#f59c45','🍊'],['Yellow','#f6cf4a','☀️'],['Pink','#f49abb','🌸'],['Purple','#9b79d1','🍇'],['Green','#70b978','🌿'],['Blue','#5b9bd5','🐳'],['Black','#343643','🐈‍⬛'],['Brown','#95664b','🐻']].map(([word,color,picture],index)=>({word,picture,detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${word.toLowerCase()}.mp3`})),
+  letters: LETTER_CARDS,
+  colors: COLOR_CARDS,
+  shapes: SHAPE_CARDS,
+  colorsShapes: [...COLOR_CARDS,...SHAPE_CARDS],
   words: [
     ['Mommy','👩'],['Daddy','👨'],['Baby','👶'],['Family','👨‍👩‍👧'],['Friend','🧒'],['Dog','🐶'],['Cat','🐱'],['Bird','🐦'],['Fish','🐟'],['Duck','🦆'],
     ['Bear','🐻'],['Bunny','🐰'],['Cow','🐮'],['Pig','🐷'],['Horse','🐴'],['Lion','🦁'],['Monkey','🐵'],['Frog','🐸'],['Bug','🐞'],['Butterfly','🦋'],

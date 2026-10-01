@@ -13,6 +13,8 @@ assert.equal(data.numbers.at(-1).word,'10','numbers must end with ten');
 assert.equal(data.letters[0].word,'A','letters must begin with A');
 assert.equal(data.letters.at(-1).word,'Z','letters must end with Z');
 assert.equal(data.colors.length,9,'nine requested colors must be present');
+assert.equal(data.shapes.length,9,'nine requested shapes must be present');
+assert.equal(data.colorsShapes.length,18,'mixed colors and shapes deck must contain all 18 cards');
 assert.equal(data.words.length,100,'first-word deck must contain 100 cards');
 assert.equal(data.words.filter(card=>card.spanish?.word&&card.spanish?.audio).length,100,'all first words must include Spanish text and audio');
 assert.equal(new Set(data.words.map(card=>card.spanish.word)).size,100,'Spanish first-word labels must be unique');
@@ -26,12 +28,19 @@ for(const card of data.numbers){
   assert(fs.existsSync(require('path').join(root,card.audio)),`missing number audio ${card.audio}`);
 }
 for(const card of data.letters){
-  assert(card.audio,`letter ${card.word} needs Poppy's voice`);
-  assert(fs.existsSync(require('path').join(root,card.audio)),`missing letter audio ${card.audio}`);
+  assert(card.image,`letter ${card.word} needs custom Meadow Pals art`);
+  assert(fs.existsSync(require('path').join(root,card.image)),`missing letter art ${card.image}`);
+  if(card.audio)assert(fs.existsSync(require('path').join(root,card.audio)),`missing letter audio ${card.audio}`);
 }
 for(const card of data.colors){
+  assert(card.image,`color ${card.word} needs custom Meadow Pals art`);
+  assert(fs.existsSync(require('path').join(root,card.image)),`missing color art ${card.image}`);
   assert(card.audio,`color ${card.word} needs Doodle's voice`);
   assert(fs.existsSync(require('path').join(root,card.audio)),`missing color audio ${card.audio}`);
+}
+for(const card of data.shapes){
+  assert(card.image,`shape ${card.word} needs custom Meadow Pals art`);
+  assert(fs.existsSync(require('path').join(root,card.image)),`missing shape art ${card.image}`);
 }
 assert.equal(groups.people.words.length,5,'people sub-deck must contain five words');
 assert.equal(groups.animals.words.length,15,'animals sub-deck must contain fifteen words');
@@ -77,10 +86,13 @@ for(const word of groupedWords){
 const app=fs.readFileSync(require('path').join(root,'app.js'),'utf8');
 const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
+assert(app.includes("shapes:{title:'Shapes',kicker:'SHAPES WITH THE PALS',size:9"),'shape sessions must include all nine shapes');
+assert(app.includes("colorsShapes:{title:'Colors & Shapes',kicker:'MIX THEM UP',size:18"),'mixed sessions must include all colors and shapes');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
-assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='54'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v54'"),'service worker cache must match the app version');
+assert(app.includes("['colors','shapes','colorsShapes','words'].includes(key)"),'colors, shapes, mixed, and word decks must shuffle');
+assert(app.includes("const APP_VERSION='55'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v55'"),'service worker cache must match the app version');
+for(const cacheGroup of ['...LETTER_ART','...COLOR_ART','...SHAPE_ART'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
 assert(serviceWorker.includes('...SPANISH_WORD_AUDIO'),'all Spanish First Words audio must be cached for offline use');
 assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');
@@ -91,7 +103,7 @@ assert(app.includes('renderFindRound'),'Find It mode must be implemented');
 assert(app.includes('togetherPrompt'),'Together mode must be implemented');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
-for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
+for(const id of ['parentHub','pinModal','profileGrid','flashCard','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','openColorShapes','colorShapeModal','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
 assert(html.includes('data-word-language="en"')&&html.includes('data-word-language="es"'),'First Words must provide an English/Spanish toggle');
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
