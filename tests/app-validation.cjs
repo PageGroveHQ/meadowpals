@@ -34,7 +34,8 @@ for(const card of data.numbers){
 for(const card of data.letters){
   assert(card.image,`letter ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing letter art ${card.image}`);
-  if(card.audio)assert(fs.existsSync(require('path').join(root,card.audio)),`missing letter audio ${card.audio}`);
+  assert(card.audio,`letter ${card.word} needs Poppy's voice`);
+  assert(fs.existsSync(require('path').join(root,card.audio)),`missing letter audio ${card.audio}`);
 }
 for(const card of data.lettersEs){
   assert(card.image,`Spanish letter ${card.word} needs custom Meadow Pals art`);
@@ -49,6 +50,8 @@ for(const card of data.colors){
 for(const card of data.shapes){
   assert(card.image,`shape ${card.word} needs custom Meadow Pals art`);
   assert(fs.existsSync(require('path').join(root,card.image)),`missing shape art ${card.image}`);
+  assert(card.audio,`shape ${card.word} needs an assigned Meadow Pal voice`);
+  assert(fs.existsSync(require('path').join(root,card.audio)),`missing shape audio ${card.audio}`);
 }
 assert.equal(groups.people.words.length,5,'people sub-deck must contain five words');
 assert.equal(groups.animals.words.length,15,'animals sub-deck must contain fifteen words');
@@ -99,9 +102,10 @@ assert(app.includes("shapes:{title:'Shapes',kicker:'SHAPES WITH THE PALS',size:9
 assert(app.includes("colorsShapes:{title:'Colors & Shapes',kicker:'MIX THEM UP',size:18"),'mixed sessions must include all colors and shapes');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("['colors','shapes','colorsShapes','words'].includes(key)"),'colors, shapes, mixed, and word decks must shuffle');
-assert(app.includes("const APP_VERSION='56'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v56'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='57'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v57'"),'service worker cache must match the app version');
 for(const cacheGroup of ['...LETTER_ART','...COLOR_ART','...SHAPE_ART','...SPANISH_LETTER_ART'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
+assert(serviceWorker.includes('...SHAPE_AUDIO_FILES'),'all shape audio must be cached for offline use');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
 assert(serviceWorker.includes('...SPANISH_WORD_AUDIO'),'all Spanish First Words audio must be cached for offline use');
 assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');

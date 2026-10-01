@@ -2,7 +2,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const KEY='meadow-pals-v1';
-  const APP_VERSION='56';
+  const APP_VERSION='57';
   const MUSIC=[
     {title:'Calm Playtime',src:'audio/meadow-pals/calm-playtime.mp3'},
     {title:'Cozy Lullaby',src:'audio/meadow-pals/cozy-lullaby.mp3'},

@@ -44,7 +44,7 @@ for(const voice of voices){
   if(!voice.referenceId||voice.referenceId.startsWith('REPLACE_'))throw new Error(`Add a Fish Audio referenceId for ${voice.name} in ${configPath}`);
   for(const category of categories){
     if(!data[category])throw new Error(`Unknown category: ${category}`);
-    const localizedCategory=language==='es'?`${category}-es`:category;
+    const localizedCategory=language==='es'?(category==='lettersEs'?'letters-es':`${category}-es`):category;
     const directory=path.join(root,'audio','voice-packs',voice.name,localizedCategory);
     await fs.mkdir(directory,{recursive:true});
     for(const [index,card] of data[category].entries()){
@@ -52,7 +52,7 @@ for(const voice of voices){
       if(assignedOnly&&card.character!==voice.name)continue;
       const file=path.join(directory,`${String(index+1).padStart(3,'0')}-${slug(card.word)}.mp3`);
       if(!force&&await exists(file)){console.log(`skip ${path.relative(root,file)}`);continue}
-      const localized=language==='es'?card.spanish:card;
+      const localized=language==='es'?(card.spanish||(category==='lettersEs'?card:null)):card;
       if(!localized?.speech)throw new Error(`Missing ${language} speech for ${category}/${card.word}`);
       const text=localized.speech;
       console.log(`make ${voice.name}/${localizedCategory}: ${text}`);

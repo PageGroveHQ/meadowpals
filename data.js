@@ -1,15 +1,15 @@
 const NUMBER_CARDS = [
-  {word:'0',speech:'Zero',image:'assets/meadow-pals/numbers/0-empty-basket.png',audio:'audio/voice-packs/pip/numbers/001-0.mp3',detail:'An empty basket means zero.'},
-  {word:'1',speech:'One',image:'assets/meadow-pals/numbers/1-apple.png',audio:'audio/voice-packs/pip/numbers/002-1.mp3',detail:'Pip is holding one apple.'},
-  {word:'2',speech:'Two',image:'assets/meadow-pals/numbers/2-birds.png',audio:'audio/voice-packs/poppy/numbers/003-2.mp3',detail:'Poppy found two birds.'},
-  {word:'3',speech:'Three',image:'assets/meadow-pals/numbers/3-ducklings.png',audio:'audio/voice-packs/doodle/numbers/004-3.mp3',detail:'Three ducklings are together.'},
-  {word:'4',speech:'Four',image:'assets/meadow-pals/numbers/4-blocks.png',audio:'audio/voice-packs/pip/numbers/005-4.mp3',detail:'Pip has four blocks.'},
-  {word:'5',speech:'Five',image:'assets/meadow-pals/numbers/5-flowers.png',audio:'audio/voice-packs/poppy/numbers/006-5.mp3',detail:'Poppy sees five flowers.'},
-  {word:'6',speech:'Six',image:'assets/meadow-pals/numbers/6-bubbles.png',audio:'audio/voice-packs/doodle/numbers/007-6.mp3',detail:'Doodle counts six bubbles.'},
-  {word:'7',speech:'Seven',image:'assets/meadow-pals/numbers/7-strawberries.png',audio:'audio/voice-packs/pip/numbers/008-7.mp3',detail:'Pip found seven strawberries.'},
-  {word:'8',speech:'Eight',image:'assets/meadow-pals/numbers/8-balloons.png',audio:'audio/voice-packs/poppy/numbers/009-8.mp3',detail:'Poppy has eight balloons.'},
-  {word:'9',speech:'Nine',image:'assets/meadow-pals/numbers/9-balls.png',audio:'audio/voice-packs/doodle/numbers/010-9.mp3',detail:'Doodle counts nine balls.'},
-  {word:'10',speech:'Ten',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!'}
+  {word:'0',speech:'Zero',character:'pip',image:'assets/meadow-pals/numbers/0-empty-basket.png',audio:'audio/voice-packs/pip/numbers/001-0.mp3',detail:'An empty basket means zero.',spanish:{word:'0',speech:'Cero',detail:'Una canasta vacía significa cero.',audio:''}},
+  {word:'1',speech:'One',character:'pip',image:'assets/meadow-pals/numbers/1-apple.png',audio:'audio/voice-packs/pip/numbers/002-1.mp3',detail:'Pip is holding one apple.',spanish:{word:'1',speech:'Uno',detail:'Pip sostiene una manzana.',audio:''}},
+  {word:'2',speech:'Two',character:'poppy',image:'assets/meadow-pals/numbers/2-birds.png',audio:'audio/voice-packs/poppy/numbers/003-2.mp3',detail:'Poppy found two birds.',spanish:{word:'2',speech:'Dos',detail:'Poppy encontró dos pájaros.',audio:''}},
+  {word:'3',speech:'Three',character:'doodle',image:'assets/meadow-pals/numbers/3-ducklings.png',audio:'audio/voice-packs/doodle/numbers/004-3.mp3',detail:'Three ducklings are together.',spanish:{word:'3',speech:'Tres',detail:'Hay tres patitos juntos.',audio:''}},
+  {word:'4',speech:'Four',character:'pip',image:'assets/meadow-pals/numbers/4-blocks.png',audio:'audio/voice-packs/pip/numbers/005-4.mp3',detail:'Pip has four blocks.',spanish:{word:'4',speech:'Cuatro',detail:'Pip tiene cuatro bloques.',audio:''}},
+  {word:'5',speech:'Five',character:'poppy',image:'assets/meadow-pals/numbers/5-flowers.png',audio:'audio/voice-packs/poppy/numbers/006-5.mp3',detail:'Poppy sees five flowers.',spanish:{word:'5',speech:'Cinco',detail:'Poppy ve cinco flores.',audio:''}},
+  {word:'6',speech:'Six',character:'doodle',image:'assets/meadow-pals/numbers/6-bubbles.png',audio:'audio/voice-packs/doodle/numbers/007-6.mp3',detail:'Doodle counts six bubbles.',spanish:{word:'6',speech:'Seis',detail:'Doodle cuenta seis burbujas.',audio:''}},
+  {word:'7',speech:'Seven',character:'pip',image:'assets/meadow-pals/numbers/7-strawberries.png',audio:'audio/voice-packs/pip/numbers/008-7.mp3',detail:'Pip found seven strawberries.',spanish:{word:'7',speech:'Siete',detail:'Pip encontró siete fresas.',audio:''}},
+  {word:'8',speech:'Eight',character:'poppy',image:'assets/meadow-pals/numbers/8-balloons.png',audio:'audio/voice-packs/poppy/numbers/009-8.mp3',detail:'Poppy has eight balloons.',spanish:{word:'8',speech:'Ocho',detail:'Poppy tiene ocho globos.',audio:''}},
+  {word:'9',speech:'Nine',character:'doodle',image:'assets/meadow-pals/numbers/9-balls.png',audio:'audio/voice-packs/doodle/numbers/010-9.mp3',detail:'Doodle counts nine balls.',spanish:{word:'9',speech:'Nueve',detail:'Doodle cuenta nueve pelotas.',audio:''}},
+  {word:'10',speech:'Ten',character:'pip',image:'assets/meadow-pals/numbers/10-stars.png',audio:'audio/voice-packs/pip/numbers/011-10.mp3',detail:'The pals found ten stars!',spanish:{word:'10',speech:'Diez',detail:'¡Los amigos encontraron diez estrellas!',audio:''}}
 ];
 
 const WORD_ASSETS = {
@@ -165,26 +165,26 @@ const LETTER_CARDS = LETTER_EXAMPLES.map(([letter,example,image],index)=>({
   image,
   detail:`${letter} is for ${example.toLowerCase()}`,
   speech:`${letter}. ${example}`,
-  audio:LETTER_AUDIO_REFRESH.has(letter)?'':`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}.mp3`
+  audio:`audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter.toLowerCase()}${LETTER_AUDIO_REFRESH.has(letter)?'-refresh':''}.mp3`
 }));
 
 const COLOR_CARDS = [
-  ['Red','#ef5d5d','red'],['Orange','#f59c45','orange'],['Yellow','#f6cf4a','yellow'],
-  ['Pink','#f49abb','pink'],['Purple','#9b79d1','purple'],['Green','#70b978','green'],
-  ['Blue','#5b9bd5','blue'],['Black','#343643','black'],['Brown','#95664b','brown']
-].map(([word,color,slug],index)=>({word,image:`assets/meadow-pals/colors/${slug}.png`,detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${slug}.mp3`}));
+  ['Red','Rojo','#ef5d5d','red'],['Orange','Naranja','#f59c45','orange'],['Yellow','Amarillo','#f6cf4a','yellow'],
+  ['Pink','Rosa','#f49abb','pink'],['Purple','Morado','#9b79d1','purple'],['Green','Verde','#70b978','green'],
+  ['Blue','Azul','#5b9bd5','blue'],['Black','Negro','#343643','black'],['Brown','Marrón','#95664b','brown']
+].map(([word,spanishWord,color,slug],index)=>({word,image:`assets/meadow-pals/colors/${slug}.png`,character:'doodle',detail:`${word} is a wonderful color`,color,speech:word,audio:`audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:`${spanishWord} es un color maravilloso`,speech:spanishWord,audio:''}}));
 
 const SHAPE_CARDS = [
-  ['Circle','circle','A ball is shaped like a circle'],
-  ['Square','square','A block has a square face'],
-  ['Triangle','triangle','A sandwich can be a triangle'],
-  ['Rectangle','rectangle','A picture frame can be a rectangle'],
-  ['Oval','oval','An egg is shaped like an oval'],
-  ['Diamond','diamond','A kite can be a diamond'],
-  ['Star','star','A star has five bright points'],
-  ['Heart','heart','A heart is a loving shape'],
-  ['Crescent','crescent','The moon can look like a crescent']
-].map(([word,slug,detail],index)=>({word,image:`assets/meadow-pals/shapes/${slug}.png`,character:['doodle','pip','poppy'][index%3],detail,speech:word,audio:''}));
+  ['Circle','Círculo','circle','A ball is shaped like a circle','Una pelota tiene forma de círculo'],
+  ['Square','Cuadrado','square','A block has a square face','Un bloque tiene una cara cuadrada'],
+  ['Triangle','Triángulo','triangle','A sandwich can be a triangle','Un sándwich puede ser un triángulo'],
+  ['Rectangle','Rectángulo','rectangle','A picture frame can be a rectangle','Un marco puede ser un rectángulo'],
+  ['Oval','Óvalo','oval','An egg is shaped like an oval','Un huevo tiene forma de óvalo'],
+  ['Diamond','Rombo','diamond','A kite can be a diamond','Una cometa puede tener forma de rombo'],
+  ['Star','Estrella','star','A star has five bright points','Una estrella tiene cinco puntas brillantes'],
+  ['Heart','Corazón','heart','A heart is a loving shape','Un corazón es una forma llena de amor'],
+  ['Crescent','Media luna','crescent','The moon can look like a crescent','La luna puede verse como una media luna']
+].map(([word,spanishWord,slug,detail,spanishDetail],index)=>{const character=['doodle','pip','poppy'][index%3];return {word,image:`assets/meadow-pals/shapes/${slug}.png`,character,detail,speech:word,audio:`audio/voice-packs/${character}/shapes/${String(index+1).padStart(3,'0')}-${slug}.mp3`,spanish:{word:spanishWord,detail:spanishDetail,speech:spanishWord,audio:''}}});
 
 const SPANISH_LETTER_EXAMPLES = [
   ['A','Agua','assets/meadow-pals/words/food-drink/water.png'],
@@ -216,8 +216,9 @@ const SPANISH_LETTER_EXAMPLES = [
   ['Z','Zapatos','assets/meadow-pals/words/clothing/shoes.png']
 ];
 
-const SPANISH_LETTER_CARDS = SPANISH_LETTER_EXAMPLES.map(([letter,example,image])=>({
-  word:letter,image,detail:`${letter} de ${example.toLowerCase()}`,speech:`${letter}. ${example}`,audio:''
+const SPANISH_LETTER_CHARACTERS = ['poppy','doodle','pip','poppy','pip','poppy','poppy','poppy','poppy','doodle','pip','pip','pip','poppy','poppy','pip','doodle','doodle','doodle','doodle','doodle','pip','pip','poppy','doodle','pip','poppy'];
+const SPANISH_LETTER_CARDS = SPANISH_LETTER_EXAMPLES.map(([letter,example,image],index)=>({
+  word:letter,image,character:SPANISH_LETTER_CHARACTERS[index],detail:`${letter} de ${example.toLowerCase()}`,speech:`${letter}. ${example}`,audio:''
 }));
 
 window.MEADOW_DATA = {

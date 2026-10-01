@@ -47,7 +47,8 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 3. Run `tools/run-fish-learning-audio.ps1` to securely generate all 100 First Words with the character assigned to each card.
 4. Run `tools/run-fish-spanish-audio.ps1` to securely generate the matching 100 Spanish First Words.
 5. Run `tools/run-fish-new-learning-audio.ps1` to repair the eight changed English letter associations and create the nine new shape clips.
-6. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
+6. Run `tools/run-fish-all-spanish-audio.ps1` to replace every translated clip with the approved native-Spanish Pip, Poppy, and Doodle voices.
+7. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
 
 Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
 

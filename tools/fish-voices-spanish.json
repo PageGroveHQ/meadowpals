@@ -1,0 +1,9 @@
+{
+  "model": "s2.1-pro-free",
+  "delayMs": 350,
+  "voices": [
+    { "name": "pip", "referenceId": "9cb697fa1b5e44f1822836ef8fb1992e" },
+    { "name": "poppy", "referenceId": "67172a9d31fe46168cf5e7455658ad06" },
+    { "name": "doodle", "referenceId": "2162dc7e8297481284a13b20290fbe34" }
+  ]
+}
