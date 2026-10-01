@@ -58,16 +58,12 @@ for(const word of groupedWords){
   const card=data.words.find(item=>item.word===word);
   assert.equal(card.character,expectedCharacters[word],`${word} must be assigned to the illustrated Meadow Pal`);
 }
-const emojiFallbackWords=new Set(['Pajamas','Diaper','Boots']);
 for(const word of groupedWords){
   const card=data.words.find(item=>item.word===word);
-  if(emojiFallbackWords.has(word))assert(!card.image&&card.picture,`${word} must temporarily use its emoji fallback`);
-  else{
-    assert(card.image,`${word} needs custom sub-deck art`);
-    const imagePath=require('path').join(root,card.image);
-    assert(fs.existsSync(imagePath),`missing sub-deck art ${card.image}`);
-    assert(fs.statSync(imagePath).size>100000,`sub-deck art is unexpectedly small: ${card.image}`);
-  }
+  assert(card.image,`${word} needs custom sub-deck art`);
+  const imagePath=require('path').join(root,card.image);
+  assert(fs.existsSync(imagePath),`missing sub-deck art ${card.image}`);
+  assert(fs.statSync(imagePath).size>100000,`sub-deck art is unexpectedly small: ${card.image}`);
   assert(card.audio,`${word} needs assigned-character audio`);
   const audioPath=require('path').join(root,card.audio);
   assert(fs.existsSync(audioPath),`missing First Words audio ${card.audio}`);
@@ -83,8 +79,8 @@ const serviceWorker=fs.readFileSync(require('path').join(root,'sw.js'),'utf8');
 assert(app.includes("letters:{title:'Letters',kicker:'READ WITH POPPY',size:26"),'letter sessions must include all 26 letters');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("if(key==='colors'||key==='words')shuffle(cards)"),'colors and word decks must shuffle');
-assert(app.includes("const APP_VERSION='53'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v53'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='54'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v54'"),'service worker cache must match the app version');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
 assert(serviceWorker.includes('...SPANISH_WORD_AUDIO'),'all Spanish First Words audio must be cached for offline use');
 assert(app.includes("category==='words'"),'First Words must block generic synthesized voice fallback');

@@ -1,4 +1,4 @@
-const CACHE='meadow-pals-v53';
+const CACHE='meadow-pals-v54';
 const LETTER_AUDIO=Array.from({length:26},(_,index)=>`./audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${String.fromCharCode(97+index)}.mp3`);
 const COLOR_AUDIO=['red','orange','yellow','pink','purple','green','blue','black','brown'].map((color,index)=>`./audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${color}.mp3`);
 const BODY_PART_ART=['head','eyes','nose','mouth','ears','hands','feet','tummy','hair','teeth'].map(name=>`./assets/meadow-pals/words/body-parts/${name}.png`);
@@ -11,7 +11,7 @@ const PLAY_ART=['ball','book','bike','doll','blocks'].map(name=>`./assets/meadow
 const NATURE_ART=['sun','moon','star','cloud','rain','snow','tree','flower','grass','sky'].map(name=>`./assets/meadow-pals/words/nature-weather/${name}.png`);
 const SOCIAL_ART=['hi','bye','yes','no','please','thanks','more','all-done','help','love'].map(name=>`./assets/meadow-pals/words/useful-social/${name}.png`);
 const HOME_ART=['cup','spoon','plate','chair','bed','bath','door','light','clock','phone'].map(name=>`./assets/meadow-pals/words/home-everyday/${name}.png`);
-const CLOTHING_ART=['shirt','pants','shoes','socks','hat','coat','dress'].map(name=>`./assets/meadow-pals/words/clothing/${name}.png`);
+const CLOTHING_ART=['shirt','pants','shoes','socks','hat','coat','dress','pajamas','diaper','boots'].map(name=>`./assets/meadow-pals/words/clothing/${name}.png`);
 const WORD_AUDIO_GROUPS={
   pip:['002-daddy','004-family','006-dog','011-bear','013-cow','015-horse','016-lion','023-car','027-plane','028-bike','031-cup','034-chair','037-door','040-phone','041-apple','044-berry','047-bread','051-head','053-nose','054-mouth','059-hair','061-shirt','065-hat','070-boots','073-star','076-snow','077-tree','083-yes','087-more','089-help','093-mad','095-hungry','096-big','099-cold'],
   poppy:['001-mommy','005-friend','007-cat','008-bird','012-bunny','014-pig','019-bug','020-butterfly','022-book','024-truck','026-boat','029-doll','033-plate','036-bath','039-clock','043-orange','046-water','049-egg','052-eyes','055-ears','056-hands','060-teeth','063-shoes','066-coat','067-dress','072-moon','075-rain','078-flower','080-sky','081-hi','084-no','086-thanks','090-love','092-sad','098-hot','100-gentle'],

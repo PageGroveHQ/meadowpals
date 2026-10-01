@@ -110,9 +110,9 @@ const WORD_ASSETS = {
   Hat:{image:'assets/meadow-pals/words/clothing/hat.png',character:'pip'},
   Coat:{image:'assets/meadow-pals/words/clothing/coat.png',character:'poppy'},
   Dress:{image:'assets/meadow-pals/words/clothing/dress.png',character:'poppy'},
-  Pajamas:{character:'doodle'},
-  Diaper:{character:'doodle'},
-  Boots:{character:'pip'}
+  Pajamas:{image:'assets/meadow-pals/words/clothing/pajamas.png',character:'doodle'},
+  Diaper:{image:'assets/meadow-pals/words/clothing/diaper.png',character:'doodle'},
+  Boots:{image:'assets/meadow-pals/words/clothing/boots.png',character:'pip'}
 };
 
 const wordSlug=value=>value.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')||'card';
