@@ -184,11 +184,46 @@ const SHAPE_CARDS = [
   ['Star','star','A star has five bright points'],
   ['Heart','heart','A heart is a loving shape'],
   ['Crescent','crescent','The moon can look like a crescent']
-].map(([word,slug,detail])=>({word,image:`assets/meadow-pals/shapes/${slug}.png`,detail,speech:word,audio:''}));
+].map(([word,slug,detail],index)=>({word,image:`assets/meadow-pals/shapes/${slug}.png`,character:['doodle','pip','poppy'][index%3],detail,speech:word,audio:''}));
+
+const SPANISH_LETTER_EXAMPLES = [
+  ['A','Agua','assets/meadow-pals/words/food-drink/water.png'],
+  ['B','Bebé','assets/meadow-pals/words/people/baby.png'],
+  ['C','Caballo','assets/meadow-pals/words/animals/horse.png'],
+  ['D','Dientes','assets/meadow-pals/words/body-parts/teeth.png'],
+  ['E','Estrella','assets/meadow-pals/words/nature-weather/star.png'],
+  ['F','Flor','assets/meadow-pals/words/nature-weather/flower.png'],
+  ['G','Gato','assets/meadow-pals/words/animals/cat.png'],
+  ['H','Huevo','assets/meadow-pals/words/food-drink/egg.png'],
+  ['I','Insecto','assets/meadow-pals/words/animals/bug.png'],
+  ['J','Jugo','assets/meadow-pals/letters/j-juice.png'],
+  ['K','Kiwi','assets/meadow-pals/letters-es/k-kiwi.png'],
+  ['L','León','assets/meadow-pals/words/animals/lion.png'],
+  ['M','Manzana','assets/meadow-pals/words/food-drink/apple.png'],
+  ['N','Naranja','assets/meadow-pals/words/food-drink/orange.png'],
+  ['Ñ','Niño','assets/meadow-pals/words/people/friend.png'],
+  ['O','Oso','assets/meadow-pals/words/animals/bear.png'],
+  ['P','Pato','assets/meadow-pals/words/animals/duck.png'],
+  ['Q','Queso','assets/meadow-pals/words/food-drink/cheese.png'],
+  ['R','Rana','assets/meadow-pals/words/animals/frog.png'],
+  ['S','Sol','assets/meadow-pals/words/nature-weather/sun.png'],
+  ['T','Tren','assets/meadow-pals/words/things-that-go/train.png'],
+  ['U','Uno','assets/meadow-pals/numbers/1-apple.png'],
+  ['V','Vaca','assets/meadow-pals/words/animals/cow.png'],
+  ['W','Waffle','assets/meadow-pals/letters-es/w-waffle.png'],
+  ['X','Xilófono','assets/meadow-pals/letters-es/x-xilofono.png'],
+  ['Y','Yo-yo','assets/meadow-pals/letters-es/y-yoyo.png'],
+  ['Z','Zapatos','assets/meadow-pals/words/clothing/shoes.png']
+];
+
+const SPANISH_LETTER_CARDS = SPANISH_LETTER_EXAMPLES.map(([letter,example,image])=>({
+  word:letter,image,detail:`${letter} de ${example.toLowerCase()}`,speech:`${letter}. ${example}`,audio:''
+}));
 
 window.MEADOW_DATA = {
   numbers: NUMBER_CARDS,
   letters: LETTER_CARDS,
+  lettersEs: SPANISH_LETTER_CARDS,
   colors: COLOR_CARDS,
   shapes: SHAPE_CARDS,
   colorsShapes: [...COLOR_CARDS,...SHAPE_CARDS],

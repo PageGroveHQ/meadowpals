@@ -15,6 +15,8 @@ const data=context.window.MEADOW_DATA;
 const categories=String(args.categories||config.categories||'words').split(',').map(value=>value.trim()).filter(Boolean);
 const requestedVoices=String(args.voices||'').split(',').map(value=>value.trim()).filter(Boolean);
 const assignedOnly=String(args.assigned||'').toLowerCase()==='true';
+const onlyCards=new Set(String(args.only||'').split(',').map(value=>value.trim().toLowerCase()).filter(Boolean));
+const force=String(args.force||'').toLowerCase()==='true';
 const language=String(args.language||'en').toLowerCase();
 if(!['en','es'].includes(language))throw new Error(`Unsupported language: ${language}`);
 const voices=config.voices.filter(voice=>!requestedVoices.length||requestedVoices.includes(voice.name));
@@ -46,9 +48,10 @@ for(const voice of voices){
     const directory=path.join(root,'audio','voice-packs',voice.name,localizedCategory);
     await fs.mkdir(directory,{recursive:true});
     for(const [index,card] of data[category].entries()){
-      if(assignedOnly&&category==='words'&&card.character!==voice.name)continue;
+      if(onlyCards.size&&!onlyCards.has(String(card.word).toLowerCase()))continue;
+      if(assignedOnly&&card.character!==voice.name)continue;
       const file=path.join(directory,`${String(index+1).padStart(3,'0')}-${slug(card.word)}.mp3`);
-      if(await exists(file)){console.log(`skip ${path.relative(root,file)}`);continue}
+      if(!force&&await exists(file)){console.log(`skip ${path.relative(root,file)}`);continue}
       const localized=language==='es'?card.spanish:card;
       if(!localized?.speech)throw new Error(`Missing ${language} speech for ${category}/${card.word}`);
       const text=localized.speech;

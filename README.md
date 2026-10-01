@@ -5,8 +5,9 @@ A calm, mobile-first flash-card app designed for toddlers and their grown-ups.
 ## Learning center
 
 - Numbers from 0 through 10
-- All 26 letters with a picture-word association
+- All 26 English letters and all 27 Spanish letters, including Ñ, with picture-word associations
 - Nine colors: red, orange, yellow, pink, purple, green, blue, black, and brown
+- Nine shapes, plus a mixed Colors & Shapes deck
 - 100 first words with English and neutral Latin American Spanish labels, prompts, and character voices
 - Complete category decks, large touch targets, swipe navigation, and built-in spoken labels
 - Local learner profiles with separate progress
@@ -45,7 +46,8 @@ The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins
 2. For a safe 0–10 test, run `tools/run-fish-number-test.ps1`; it requests the API key through a hidden prompt and removes it when generation ends.
 3. Run `tools/run-fish-learning-audio.ps1` to securely generate all 100 First Words with the character assigned to each card.
 4. Run `tools/run-fish-spanish-audio.ps1` to securely generate the matching 100 Spanish First Words.
-5. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
+5. Run `tools/run-fish-new-learning-audio.ps1` to repair the eight changed English letter associations and create the nine new shape clips.
+6. For manual generation, set the API key only for the current terminal and run `node tools/fish-voice-pack.mjs --config=tools/fish-voices.example.json --categories=words --assigned=true`. Add `--language=es` for Spanish.
 
 Output is written under `audio/voice-packs/<voice>/<category>/`. Do not commit the API key or put it in the JSON file.
 
