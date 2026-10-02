@@ -36,7 +36,7 @@ This is a static progressive web app. Serve the repository root with any local w
 
 ## Music
 
-The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins after the first user interaction, rotates automatically, lowers itself while a card name is spoken, and can be paused from the header or Parent Hub.
+The supplied tracks are bundled locally under `audio/meadow-pals/`. Music begins after the first user interaction, rotates automatically, lowers itself while a card name is spoken, and can be paused from the header or Parent Hub. Music and spoken audio are fully suspended and their active media sources are released whenever the app is hidden, the device is locked, or the learner switches to another app.
 
 ## Generating Fish Audio voice packs
 

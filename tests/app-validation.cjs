@@ -110,8 +110,8 @@ assert(app.includes("shapes:{title:'Shapes',spanishTitle:'Formas'")&&app.include
 assert(app.includes("colorsShapes:{title:'Colors & Shapes',spanishTitle:'Colores y formas'")&&app.includes("size:18,color:'#eef0dc'"),'mixed sessions must include all colors and shapes');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("['colors','shapes','colorsShapes','words'].includes(key)"),'colors, shapes, mixed, and word decks must shuffle');
-assert(app.includes("const APP_VERSION='59'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v59'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='60'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v60'"),'service worker cache must match the app version');
 for(const cacheGroup of ['...LETTER_ART','...COLOR_ART','...SHAPE_ART','...SPANISH_LETTER_ART'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
 assert(serviceWorker.includes('...SHAPE_AUDIO_FILES'),'all shape audio must be cached for offline use');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
@@ -126,6 +126,9 @@ assert(app.includes('selectedWordGroups'),'First Words must support selecting mu
 assert(app.includes('renderFindRound'),'Find It mode must be implemented');
 assert(app.includes('togetherPrompt'),'Together mode must be implemented');
 assert(app.includes('checkForUpdate'),'parent settings must provide an app update check');
+assert(app.includes("document.addEventListener('visibilitychange'"),'audio must stop when the app is hidden or the phone locks');
+assert(app.includes("window.addEventListener('pagehide',suspendAudio)"),'audio must stop when the app leaves the foreground');
+assert(app.includes("music.removeAttribute('src')")&&app.includes("voicePlayer.removeAttribute('src')"),'background suspension must release active audio sources');
 const html=fs.readFileSync(require('path').join(root,'index.html'),'utf8');
 for(const id of ['parentHub','pinModal','profileGrid','flashCard','openNumbers','numberLanguageModal','openLetters','letterLanguageModal','openWordGroups','wordGroupModal','wordGroupGrid','startWordGroups','openColorShapes','colorShapeModal','findChoices'])assert(html.includes(`id="${id}"`),`missing ${id}`);
 assert(html.includes('data-word-language="en"')&&html.includes('data-word-language="es"'),'First Words must provide an English/Spanish toggle');

@@ -2,7 +2,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const KEY='meadow-pals-v1';
-  const APP_VERSION='59';
+  const APP_VERSION='60';
   const MUSIC=[
     {title:'Calm Playtime',src:'audio/meadow-pals/calm-playtime.mp3'},
     {title:'Cozy Lullaby',src:'audio/meadow-pals/cozy-lullaby.mp3'},
@@ -42,6 +42,9 @@
   function startMusic(){const audio=musicPlayer();if(!store.music)return pauseMusic();const track=MUSIC[store.musicTrack];if(!audio.src.endsWith(track.src)){audio.src=track.src;audio.load()}audio.volume=.18;audio.play().then(renderSound).catch(renderSound)}
   function pauseMusic(){musicPlayer().pause();renderSound()}
   const voicePlayer=new Audio();
+  let audioSuspended=false,resumeMusicAfterForeground=false;
+  function suspendAudio(){if(audioSuspended)return;audioSuspended=true;const music=musicPlayer();resumeMusicAfterForeground=store.music&&!music.paused;music.pause();music.removeAttribute('src');music.load();voicePlayer.pause();voicePlayer.removeAttribute('src');voicePlayer.load();if('speechSynthesis'in window)window.speechSynthesis.cancel();renderSound()}
+  function restoreAudio(){if(!audioSuspended)return;audioSuspended=false;if(resumeMusicAfterForeground&&store.music)startMusic();else renderSound();resumeMusicAfterForeground=false}
   function synthesizedSpeech(text,language='en'){if(!('speechSynthesis'in window))return;const music=musicPlayer(),u=new SpeechSynthesisUtterance(text);u.rate=.78;u.pitch=1.08;u.volume=.9;u.lang=language==='es'?'es-US':'en-US';const voices=speechSynthesis.getVoices(),matchesLanguage=v=>new RegExp(`^${language}`,'i').test(v.lang);u.voice=voices.find(v=>matchesLanguage(v)&&/Samantha|Ava|Jenny|female|Paulina|Monica|Lucia/i.test(v.name))||voices.find(matchesLanguage)||null;u.onstart=()=>{if(!music.paused)music.volume=.07};u.onend=()=>{music.volume=.18};speechSynthesis.speak(u)}
   function speechFallback(text){if(category==='words'){toast('This Meadow Pal voice is getting ready');return}synthesizedSpeech(text,deckLanguage)}
   function speak(text,src){if(!store.sound)return;if('speechSynthesis'in window)window.speechSynthesis.cancel();voicePlayer.pause();voicePlayer.currentTime=0;if(!src)return speechFallback(text);const music=musicPlayer();voicePlayer.src=src;voicePlayer.volume=1;voicePlayer.onplay=()=>{if(!music.paused)music.volume=.07};voicePlayer.onended=()=>{music.volume=.18};voicePlayer.onerror=()=>{music.volume=.18;speechFallback(text)};voicePlayer.play().catch(()=>{music.volume=.18;speechFallback(text)})}
@@ -94,5 +97,6 @@
   $('#pinForm').onsubmit=async e=>{e.preventDefault();const val=$('#pinInput').value;if(val.length!==4){$('#pinError').textContent='Please enter 4 numbers.';return}const digest=await hash(val);if(pinMode==='create'){store.pinHash=digest;save();$('#pinModal').hidden=true;openParentHub();toast('Parent PIN created')}else if(digest===store.pinHash){$('#pinModal').hidden=true;openParentHub()}else{$('#pinError').textContent='That PIN did not match. Try again.';$('#pinInput').value='';updateDots()}};
   $$('[data-close]').forEach(b=>b.onclick=()=>b.closest('.modal-layer').hidden=true);$('#closeParent').onclick=()=>{$('#parentHub').hidden=true;renderHome()};$$('[data-parent-tab]').forEach(b=>b.onclick=()=>{parentTab=b.dataset.parentTab;$$('[data-parent-tab]').forEach(x=>x.classList.toggle('selected',x===b));renderParent()});
   $('#soundToggle').onclick=()=>{store.sound=!store.sound;save();renderSound();if(store.sound){const prior=category;category='';speak('Hello!');category=prior}};$('#musicToggle').onclick=()=>{store.music=!store.music;save();store.music?startMusic():pauseMusic();toast(store.music?'Gentle music on':'Music paused')};$('#speakCard').onclick=()=>speakCurrentCard(cards[cardIndex]);$('#speakFind').onclick=()=>speakCurrentCard(cards[cardIndex]);$('#hearWord').onclick=e=>{e.stopPropagation();speakCurrentCard(cards[cardIndex])};$('#flashCard').onclick=()=>speakCurrentCard(cards[cardIndex]);$('#flashCard').onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();speakCurrentCard(cards[cardIndex])}};$('#nextCard').onclick=()=>nextCard(1);$('#prevCard').onclick=()=>nextCard(-1);$('#flashCard').ontouchstart=e=>touchX=e.touches[0].clientX;$('#flashCard').ontouchend=e=>{const d=e.changedTouches[0].clientX-touchX;if(Math.abs(d)>60)nextCard(d<0?1:-1)};musicPlayer().onended=()=>{store.musicTrack=(store.musicTrack+1)%MUSIC.length;save();startMusic()};musicPlayer().onplay=renderSound;musicPlayer().onpause=renderSound;
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)suspendAudio();else restoreAudio()});window.addEventListener('pagehide',suspendAudio);window.addEventListener('pageshow',restoreAudio);
   renderHome();renderSound();save();if('serviceWorker'in navigator){let reloading=false;navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloading)return;reloading=true;location.reload()});navigator.serviceWorker.register(`sw.js?v=${APP_VERSION}`).catch(()=>{})}
 })();
