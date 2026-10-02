@@ -1,4 +1,4 @@
-const CACHE='meadow-pals-v58';
+const CACHE='meadow-pals-v59';
 const REFRESHED_LETTERS=new Set(['g','h','l','n','r','t','w','y']);
 const LETTER_AUDIO=Array.from({length:26},(_,index)=>{const letter=String.fromCharCode(97+index);return `./audio/voice-packs/poppy/letters/${String(index+1).padStart(3,'0')}-${letter}${REFRESHED_LETTERS.has(letter)?'-refresh':''}.mp3`});
 const COLOR_AUDIO=['red','orange','yellow','pink','purple','green','blue','black','brown'].map((color,index)=>`./audio/voice-packs/doodle/colors/${String(index+1).padStart(3,'0')}-${color}.mp3`);

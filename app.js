@@ -2,7 +2,7 @@
   'use strict';
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const KEY='meadow-pals-v1';
-  const APP_VERSION='58';
+  const APP_VERSION='59';
   const MUSIC=[
     {title:'Calm Playtime',src:'audio/meadow-pals/calm-playtime.mp3'},
     {title:'Cozy Lullaby',src:'audio/meadow-pals/cozy-lullaby.mp3'},
@@ -37,7 +37,7 @@
   const esc=s=>String(s).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
   const toast=message=>{const el=$('#toast');el.textContent=message;el.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.classList.remove('show'),1800)};
   function go(screen){$$('.screen').forEach(s=>s.classList.toggle('active',s.dataset.screen===screen));window.scrollTo({top:0,behavior:'smooth'});if(screen==='home')renderHome();if(screen==='profiles')renderProfiles()}
-  function renderHome(){const p=active(),spanish=store.wordLanguage==='es';$('#activeName').textContent=p.name;$('#activeAvatar').textContent=p.name.charAt(0).toUpperCase();$('#helloText').textContent=`Hello, ${p.name}!`;if($('#wordPathKicker'))$('#wordPathKicker').textContent=spanish?'APRENDAMOS JUNTOS':'EXPLORE TOGETHER';if($('#wordPathTitle'))$('#wordPathTitle').textContent=spanish?'Primeras palabras':'First Words';if($('#wordPathDetail'))$('#wordPathDetail').textContent=spanish?'Elige uno o más grupos':'Choose a word group'}
+  function renderHome(){const p=active();$('#activeName').textContent=p.name;$('#activeAvatar').textContent=p.name.charAt(0).toUpperCase();$('#helloText').textContent=`Hello, ${p.name}!`;if($('#wordPathKicker'))$('#wordPathKicker').textContent='EXPLORE TOGETHER';if($('#wordPathTitle'))$('#wordPathTitle').textContent='First Words · Primeras palabras';if($('#wordPathDetail'))$('#wordPathDetail').textContent='English or Español'}
   function musicPlayer(){return $('#backgroundMusic')}
   function startMusic(){const audio=musicPlayer();if(!store.music)return pauseMusic();const track=MUSIC[store.musicTrack];if(!audio.src.endsWith(track.src)){audio.src=track.src;audio.load()}audio.volume=.18;audio.play().then(renderSound).catch(renderSound)}
   function pauseMusic(){musicPlayer().pause();renderSound()}

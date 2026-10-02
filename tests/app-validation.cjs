@@ -110,8 +110,8 @@ assert(app.includes("shapes:{title:'Shapes',spanishTitle:'Formas'")&&app.include
 assert(app.includes("colorsShapes:{title:'Colors & Shapes',spanishTitle:'Colores y formas'")&&app.includes("size:18,color:'#eef0dc'"),'mixed sessions must include all colors and shapes');
 assert(app.includes("words:{title:'First Words',kicker:'EXPLORE TOGETHER',size:100"),'word sessions must include all 100 words');
 assert(app.includes("['colors','shapes','colorsShapes','words'].includes(key)"),'colors, shapes, mixed, and word decks must shuffle');
-assert(app.includes("const APP_VERSION='58'"),'app and cache version must be current');
-assert(serviceWorker.includes("const CACHE='meadow-pals-v58'"),'service worker cache must match the app version');
+assert(app.includes("const APP_VERSION='59'"),'app and cache version must be current');
+assert(serviceWorker.includes("const CACHE='meadow-pals-v59'"),'service worker cache must match the app version');
 for(const cacheGroup of ['...LETTER_ART','...COLOR_ART','...SHAPE_ART','...SPANISH_LETTER_ART'])assert(serviceWorker.includes(cacheGroup),`${cacheGroup} must be cached for offline use`);
 assert(serviceWorker.includes('...SHAPE_AUDIO_FILES'),'all shape audio must be cached for offline use');
 assert(serviceWorker.includes('...WORD_AUDIO'),'all First Words audio must be cached for offline use');
@@ -131,6 +131,10 @@ for(const id of ['parentHub','pinModal','profileGrid','flashCard','openNumbers',
 assert(html.includes('data-word-language="en"')&&html.includes('data-word-language="es"'),'First Words must provide an English/Spanish toggle');
 assert(html.includes('data-number-language="en"')&&html.includes('data-number-language="es"'),'Numbers must provide an English/Spanish choice');
 assert(html.includes('data-concept-language="en"')&&html.includes('data-concept-language="es"'),'Colors and Shapes must provide an English/Spanish toggle');
+for(const title of ['Numbers · Números','Letters · Letras','Colors &amp; Shapes · Colores y formas','First Words · Primeras palabras'])assert(html.includes(title),`home path needs bilingual title: ${title}`);
+assert.equal((html.match(/English or Español/g)||[]).length,4,'all four home paths must use the same language description');
+assert(html.includes('id="closeParent" aria-label="Back to the learning center">← Back to Learning</button>'),'Parent Hub must show a visible return label');
+assert(fs.readFileSync(require('path').join(root,'styles.css'),'utf8').includes('.parent-hub header button{border:0;background:white;color:var(--ink);'),'Parent Hub return label must contrast with its white button');
 assert(fs.existsSync(require('path').join(root,'assets','meadow-pals','app-icon.png')),'missing redesigned app icon');
 for(const track of ['calm-playtime.mp3','cozy-lullaby.mp3','little-steps.mp3','sweet-kindergarten.mp3']){
   assert(fs.existsSync(require('path').join(root,'audio','meadow-pals',track)),`missing music track ${track}`);
